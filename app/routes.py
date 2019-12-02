@@ -1,7 +1,17 @@
+from load import *
 from flask import render_template, flash, redirect, url_for
 from flask import request
 from werkzeug.urls import url_parse
-from flask import Flask           # import flask
+from flask import Flask
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import re
+import base64
+import sys
+import os
+sys.path.append(os.path.abspath("./model"))
 
 app = Flask(__name__)             # create an app instance
 
@@ -12,5 +22,32 @@ def index():
     return render_template('index.html')
 
 
-if __name__ == "__main__":        # on running python app.py
+@app.route('/data', methods=['GET', 'POST'])
+def data():
+    # gets canvas image
+    parseImg(request.get_data())
+    # read parsed image
+    d = Image.open('result.png', 'r')
+    # resize image to 28x28
+    d = d.resize((28, 28))
+    d.save('result.png')
+    img = mpimg.imread('result.png')
+    imgplot = plt.imshow(img)
+    plt.show()
+    d = np.asarray(d)
+    # reshape the data to feed into NN
+    d = d.reshape(-1, 1, 28, 28)
+
+    print(d)
+    return render_template('index.html')
+
+
+def parseImg(imageData):
+    # parse canvas image bytes and save as result.png
+    imageString = re.search(b'base64,(.*)', imageData).group(1)
+    with open('result.png', 'wb') as result:
+        result.write(base64.decodebytes(imageString))
+
+
+if __name__ == "__main__":
     app.run(debug=True)

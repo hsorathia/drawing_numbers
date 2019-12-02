@@ -30,30 +30,45 @@
         </canvas>
         <div class="row buttons">
             <a id="download" download="image.png"><button type="button" class="btn btn-primary"
-                    onClick="download()">Save</button></a>
+                    onClick="sendData()">Save</button></a>
             <button class="btn btn-danger" id="clear">Clear</button>
         </div>
     </div>
 
     <script>
         // download canvas
-        function download() {
+        function sendData() {
+            var obj = document.getElementById("canvas");
+            var img = obj.toDataURL('image/png');
+            $.ajax({
+                type: "POST",
+                url: "/data",
+                data: img,
+                success: function (data) {
+                    console.log("Sent")
+                }
+            });
+            /*
             var download = document.getElementById("download");
             var image = document.getElementById("canvas").toDataURL("image/png")
                 .replace("image/png", "image/octet-stream");
             download.setAttribute("href", image);
+            */
         }
         window.addEventListener("load", () => {
             const canvas = document.querySelector("#canvas");
-            const ctx = canvas.getContext("2d")
-            canvas.height = 500;
-            canvas.width = 500;
+            const ctx = canvas.getContext("2d");
+            canvas.height = 328;
+            canvas.width = 328;
 
             let paint = false;
 
             function start(e) {
                 paint = true;
-                draw(e);
+                btn = e.button;
+                if (btn === 0) {
+                    draw(e);
+                }
             }
             function end() {
                 paint = false;
