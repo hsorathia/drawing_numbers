@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CMPE130</title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+    .buttons {
+        margin-left: 30px;
+    }
+
+    .btn {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div id="drawing">
+        <canvas id="canvas" style="border: 1px solid black;">
+
+        </canvas>
+        <div class="row buttons">
+            <a id="download" download="image.png"><button type="button" class="btn btn-primary"
+                    onClick="download()">Save</button></a>
+            <button class="btn btn-danger" id="clear">Clear</button>
+        </div>
+    </div>
+
+    <script>
+        // download canvas
+        function download() {
+            var download = document.getElementById("download");
+            var image = document.getElementById("canvas").toDataURL("image/png")
+                .replace("image/png", "image/octet-stream");
+            download.setAttribute("href", image);
+        }
+        window.addEventListener("load", () => {
+            const canvas = document.querySelector("#canvas");
+            const ctx = canvas.getContext("2d")
+            canvas.height = 500;
+            canvas.width = 500;
+
+            let paint = false;
+
+            function start(e) {
+                paint = true;
+                draw(e);
+            }
+            function end() {
+                paint = false;
+                ctx.beginPath();
+            }
+            function draw(e) {
+                if (paint == false) {
+                    return;
+                }
+                ctx.lineWidth = 10;
+                ctx.lineCap = "round";
+                ctx.lineTo(e.clientX, e.clientY);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(e.clientX, e.clientY);
+            }
+
+            // event listener
+            canvas.addEventListener('mousedown', start);
+            canvas.addEventListener('mouseup', end);
+            canvas.addEventListener('mousemove', draw)
+
+            // clear canvas
+            document.getElementById("clear").addEventListener("click", function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            })
+
+        });
+
+    </script>
+</body>
+
+
+
+</html>
