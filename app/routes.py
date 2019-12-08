@@ -19,7 +19,7 @@ app = Flask(__name__)             # create an app instance
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('landing.html')
 
 
 @app.route('/data', methods=['GET', 'POST'])

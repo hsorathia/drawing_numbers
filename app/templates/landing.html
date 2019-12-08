@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container" style="height: fit-content; min-height: 100%;">
+            <div class="header-content">
+                <div class="row landing">
+                    <div class="landing-title col-lg-6">
+                        <div style="margin-top: 330px;"></div>
+                        <h1>Number Recognition</h1>
+                        <p>Neural network application to identify user drawn numbers</p>
+                        <button class="btn btn-outline-light">Learn More</button>
+                    </div>
+                    <div class="col-lg-6">
+                        <div style="margin-top: 230px;"></div>
+                        <img src="../static/images/growth.svg" class="img-fluid" width="600px" height="600px" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-section container-fluid" style="min-height: 100vh;">
+            <div class="row d-flex justify-content-center" style="margin-top: 120px;">
+                <h1>About</h1>
+            </div>
+            <div class="row" style="margin-top: 120px;">
+                <div class="col-lg-6 about-img">
+                    <img src="../static/images/analysis.svg" alt="" class="img-fluid" width="700px" height="700px">
+                </div>
+                <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px;">
+                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Users will draw and save a number onto our
+                        drawing canvas.</h5>
+                    <br>
+                    <br>
+                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Once saved, the image will be sent to the
+                        backend for number
+                        prediction. </h5>
+                    <br>
+                    <br>
+                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> The image will be converted into a 28x28px
+                        image and converted
+                        into readable data.</h5>
+                    <br>
+                    <br>
+                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Data will be fed into our neural network
+                        and
+                        output the
+                        prediction onto the frontend.</h5>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="neural-section" style="min-height: 170vh; height: fit-content;">
+            <img class="wave-flip" src="../static/images/wave-bottom.svg" alt="">
+            <div class="row d-flex justify-content-center" style="margin-top: 50px;">
+                <h1>Neural Network</h1>
+            </div>
+            <div class="row" style="margin-top: 90px;">
+                <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px; text-align: center;">
+                    <h4>Our neural network is constructed from scratch using <strong><u>NumPy</u></strong></h4>
+                    <br>
+                    <h5>Along with the <strong><u>MNIST</u></strong> dataset to train our network.</h5>
+                    <br><br>
+                    <h5>1 Input Layer</h5>
+                    <h5>2 Hidden Layers</h5>
+                    <h5>1 Output Layer</h5>
+                    <br><br>
+                    <div style="padding: 0 70px;">
+                        <h5><i class="fas fa-arrow-right"></i> Feedforward function for dataset</h5>
+                        <h5><i class="fas fa-arrow-right"></i> Split training data into batches</h5>
+                        <h5><i class="fas fa-arrow-right"></i> Backwards propagation to adjust values</h5>
+                    </div>
+                </div>
+                <div class="col-lg-6 about-img">
+                    <img src="../static/images/neural.svg" alt="" class="img-fluid" width="700px" height="700px">
+                </div>
+            </div>
+        </div>
+        <div class="contact-section container-fluid" style="height: 70vh;">
+            <div class="row d-flex justify-content-center" style="margin-top: 60px;">
+                <div id="contact">
+                    <h1 class="h-center"><span class="underline">Contact Us</span></h1>
+                    <br>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="contact-question">
+                                    <p>Have a question?
+                                    </p>
+                                </div>
+                                <div class="contact-form" id="main-contact">
+                                    <form id="contact-form" name="contact-form" action="" method="POST">
+                                        <div class="row">
+                                            <!-- TO DO VALIDATION -->
+                                            <div class="col-sm-12 col-md-12  mb-2">
+                                                <input name="name" type="text" class="form-control center-block"
+                                                    placeholder="Name" id="contact-name" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12  mb-2">
+                                                <input name="email" type="email" class="form-control center-block"
+                                                    placeholder="Email" id="contact-email" required>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12  mb-2">
+                                                <textarea name="message" class="form-control center-block"
+                                                    placeholder="Message" rows="6" id="contact-message"
+                                                    required></textarea>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12  mb-2">
+                                                <input type="submit" class="btn btn-outline-dark" value="Submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Number Recognition - Copyright © 2019
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        $("#block-content").animate({
+            opacity: '1'
+        }, "slow")
+    })
+</script>
