@@ -29,5 +29,6 @@ import neural
 training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 training_data = list(training_data)
 
-net = neural.Network([784, 30, 10])
+# neural network with 4 layers:
+net = neural.Network([784, 16, 16, 10])
 net.training(training_data, 30, 10, 3.0, test_data=test_data)
