@@ -1,8 +1,7 @@
 from load import *
-from flask import render_template, flash, redirect, url_for
-from flask import request
+from flask import Flask, render_template, flash, redirect, url_for, request
+from flask import current_app as app
 from werkzeug.urls import url_parse
-from flask import Flask
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -13,13 +12,10 @@ import sys
 import os
 sys.path.append(os.path.abspath("./model"))
 
-app = Flask(__name__)             # create an app instance
-
-
 @app.route('/')
-@app.route('/index')
-def index():
-    return render_template('index.html')
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 
 @app.route('/data', methods=['GET', 'POST'])
@@ -48,6 +44,3 @@ def parseImg(imageData):
     with open('result.png', 'wb') as result:
         result.write(base64.decodebytes(imageString))
 
-
-if __name__ == "__main__":
-    app.run(debug=True)

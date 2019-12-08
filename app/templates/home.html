@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html>
-
-<head>
+{% extends "base.html" %}
+{% block head %}
     <meta charset="utf-8">
     <title>CMPE130</title>
     <meta name="author" content="">
@@ -12,7 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-</head>
+{% endblock %}
+{% block style %}
 <style>
     .buttons {
         margin-left: 30px;
@@ -22,8 +21,9 @@
         margin: 10px;
     }
 </style>
+{% endblock %}
 
-<body>
+{% block body %}
     <div id="drawing">
         <canvas id="canvas" style="border: 1px solid black;">
 
@@ -99,8 +99,4 @@
         });
 
     </script>
-</body>
-
-
-
-</html>
+{% endblock %}
