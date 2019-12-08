@@ -62,6 +62,46 @@ class Network(object):
         gradient_w = [np.zeros(w.shape) for w in self.weights]
         
         #feeding things forward
-        act = x     # currently activated
-        acts = [x]  # list for all activations
-        z = []      # all z vectors
+        activation = x     # currently activated
+        activationss = [x]  # list for all activations
+        zs = []      # all z vectors
+        # check every bias/weight
+        for b, w in zip(self.biases, self.weights):
+            # dot product between weight and activation layer
+            z = np.dot(w, activation) + b
+            zs.append(z)
+            # feed z through the sigmoid function
+            activation = sigmoid(z)
+            activations.append(activation)
+        # backward pass
+        # calculate steepest descent
+        delta = self.cost_derivative(activations[-1], y) * sigmoid_prime(zs[-1])
+        # update gradient
+        gradient_b[-1] = delta
+        gradient_w[-1] = np.dot(delta, activations[-2].transpose())
+        # renumbering each neuron
+        for l in range(2, self.num_layers):
+            z = zs[-1]
+            sp = sigmoid_prime(z)
+            delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
+            gradient_b[-1] = delta
+            gradient_w[-1] = np.dot(delta, activations[-l-1].transpose())
+        return (gradient_b, gradient_w)
+    
+    # how many test inputs output the correct result
+    def evaluate(self, test_data):
+        # obtain results by feeding everything forward. results[0] is network result, results[1] is expected
+        results = [(np.argmax(self.feedforward(x)), y) for (x,y) in test_data]
+        return sum(int(x == y) for (x,y) in results)
+    
+    # return vector of steepest descent
+    def cost_derivative(self, out_act, y):
+        return (output_activations-y)
+
+# sigmoid function (copied from github)
+def sigmoid(z):
+    return 1.0 / (1.0 + np.exp(-z))
+
+# derivative of sigmoid (copied from github because calculus is hard)
+def sigmoid_prime(z):
+    return sigmoid(z)*(1-sigmoid(z))
