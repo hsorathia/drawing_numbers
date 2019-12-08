@@ -1,7 +1,4 @@
-#BALJEETFORPRESIDENT
-
 import random
-
 import numpy as np
 
 class Network(object):
@@ -25,8 +22,13 @@ class Network(object):
         # epoch = how many times to put the whole data set into the network
         # batchSize = we will splice the training data into batches and feed them in. This is the size
         # eta = learning rate
+
+        #convert data/test_data to lists and find length
+        data = list(data)
+        test_data = list(test_data)
         n_test = len(test_data)
         n = len(data)
+
         for i in range(epoch):
             # shuffle training data to reduce potential bias
             random.shuffle(data)
@@ -40,9 +42,9 @@ class Network(object):
                 self.upbatch(batch, eta)
             if test_data:
                 # Print Epoch #, how many correct, number tests
-                print("Epoch{0}: {1} / {2}".format(j, self.evaluate(test_data), n_test))
+                print("Epoch{}: {} / {}".format(i, self.evaluate(test_data), n_test))
             else:
-                print("Epoch{0} complete".format(j))
+                print("Epoch{} complete".format(i))
 
     def upbatch(self, batch, eta):
         # batch is the data
@@ -55,7 +57,11 @@ class Network(object):
             # adjust the gradient based on backprop
             gradient_b = [nb+dnb for nb, dnb in zip(gradient_b, dgb)]
             gradient_w = [nw+dnw for nw, dnw in zip(gradient_w, dgw)]
-    
+        self.weights = [w-(eta/len(batch))*nw
+                        for w, nw in zip(self.weights, gradient_w)]
+        self.biases = [b-(eta/len(batch))*nb
+                       for b, nb in zip(self.biases, gradient_b)]
+
     def backprop(self, x, y):
         #gradient vectors of bias and weight
         gradient_b = [np.zeros(b.shape) for b in self.biases]
@@ -63,8 +69,8 @@ class Network(object):
         
         #feeding things forward
         activation = x     # currently activated
-        activationss = [x]  # list for all activations
-        zs = []      # all z vectors
+        activations = [x]  # list for all activations
+        zs = []            # all z vectors
         # check every bias/weight
         for b, w in zip(self.biases, self.weights):
             # dot product between weight and activation layer
@@ -80,23 +86,23 @@ class Network(object):
         gradient_b[-1] = delta
         gradient_w[-1] = np.dot(delta, activations[-2].transpose())
         # renumbering each neuron
-        for l in range(2, self.num_layers):
-            z = zs[-1]
+        for x in range(2, self.num_layers):
+            z = zs[-x]
             sp = sigmoid_prime(z)
-            delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
-            gradient_b[-1] = delta
-            gradient_w[-1] = np.dot(delta, activations[-l-1].transpose())
+            delta = np.dot(self.weights[-x+1].transpose(), delta) * sp
+            gradient_b[-x] = delta
+            gradient_w[-x] = np.dot(delta, activations[-x-1].transpose())
         return (gradient_b, gradient_w)
     
     # how many test inputs output the correct result
     def evaluate(self, test_data):
         # obtain results by feeding everything forward. results[0] is network result, results[1] is expected
-        results = [(np.argmax(self.feedforward(x)), y) for (x,y) in test_data]
+        results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
         return sum(int(x == y) for (x,y) in results)
     
-    # return vector of steepest descent
+    # return vector of steepest descent from partial derivatives
     def cost_derivative(self, out_act, y):
-        return (output_activations-y)
+        return (out_act-y)
 
 # sigmoid function (copied from github)
 def sigmoid(z):
