@@ -40,6 +40,29 @@ body{
     text-transform: capitalize;
     color: white;
 }
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.363) !important;
+    transition: background-color 200ms linear;
+}
+.login-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    padding-right: 10px;
+    transition: ease 0.5s;
+}
+.login-btn:hover{
+    font-size: 26px;
+}
+.register-btn{
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    transition: ease 0.5s;
+}
+.register-btn:hover{
+    font-size: 26px;
+}
 .landing{
     text-align: center;
 }
