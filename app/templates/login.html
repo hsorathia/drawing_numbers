@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block style %}
+<style>
+  body{
+    margin:30px;
+  }
+    .buttons {
+        margin-left: 30px;
+    }
+
+    .btn {
+        margin: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form method='post' novalidate>
+  {{ form.hidden_tag() }}
+
+  <div class="form-group">
+    <div class="form-row">
+      <label for="staticEmail" class="col-lg-1 col-form-label">Username</label>
+      <div class="col-lg-4">
+        {{ form.username(class_="form-control", placeholder=" Username", size=32) }}
+      </div>
+    </div>
+    <div class="form-row">
+      <label for="inputPassword" class="col-lg-1 col-form-label">Password</label>
+      <div class="col-lg-4">
+        {{ form.password(class_="form-control", placeholder=" Password", size=32) }}
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-lg-4">
+        {{ form.submit(class_="btn btn-primary") }}
+      </div>
+    </div>
+  </div>
+
+  <p><a id="signup-link" href="{{ url_for('register') }}">Don't have an account? </a></p>
+</form>
+{% endblock %}
