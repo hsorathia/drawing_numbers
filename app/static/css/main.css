@@ -1,0 +1,89 @@
+body{
+    font-size: tahoma;
+    
+    overflow-x: hidden;
+}
+.header{
+    background: url(../images/header-cover.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+.header:after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    min-width: 150%;
+    background-image: url(../images/wave-bottom.svg);
+    height: 275px;
+}
+.footer{
+    height: 50px;
+    color: black;
+    text-align: center;
+}
+.header-content{
+    z-index: 1;
+    position: relative;
+}
+.header-content h1{
+    font-weight: bold;
+    text-transform: capitalize;
+    color: white;
+}
+.header-content p{
+    font-size: 20px;
+    margin: 20px 0 25px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-transform: capitalize;
+    color: white;
+}
+.landing{
+    text-align: center;
+}
+.about-section{
+    height: fit-content;
+    color: rgb(190, 22, 73);
+}
+.about-img{
+    padding-right: 100px;
+}
+.text-blob{
+    border: 2px solid rgb(221, 28, 86);
+    /* background: url(../images/header-cover.jpg); */
+    background-position: center right;
+    background-attachment: fixed;
+    padding: 20px 15px;
+    border-radius: 10px;
+    transition: ease 0.5s;
+}
+.text-blob:hover{
+    background-color: rgb(221, 28, 86);
+    color: white;
+    padding: 25px;
+    font-size: 26px;
+    box-shadow: 5px 5px 5px rgba(221, 28, 86, 0.527);
+}
+.neural-section{
+    background: url(../images/header-cover.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    color: white;
+}
+.wave-flip{
+    position: relative;
+    transform: rotate(180deg);
+    content: '';
+    min-width: 150%;
+}
+.neural-section:after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    min-width: 150%;
+    background-image: url(../images/wave-bottom.svg);
+    height: 275px;
+}

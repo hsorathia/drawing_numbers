@@ -13,9 +13,9 @@ import os
 sys.path.append(os.path.abspath("./model"))
 
 @app.route('/')
-@app.route('/home')
+@app.route('/landing')
 def home():
-    return render_template('home.html')
+    return render_template('landing.html')
 
 
 @app.route('/data', methods=['GET', 'POST'])

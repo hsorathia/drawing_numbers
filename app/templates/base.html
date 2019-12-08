@@ -7,6 +7,18 @@
     {% block style %}{% endblock %}
 
     <body>
-        {% block body %}{% endblock %}
+        <div id="block-content">
+                {% block content %}{% endblock %}
+        </div>
     </body>
+    <script>
+            $(document).ready(function () {
+                $("#block-content").animate({
+                    opacity: '1'
+                }, "slow")
+            })
+    </script>
 </html>
+
+
+
