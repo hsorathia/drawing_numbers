@@ -24,9 +24,16 @@ def home():
     form_register = RegisterForm()
     return render_template('landing.html', form_login=form_login, form_register=form_register)
 
+@app.route('/draw', methods=['GET', 'POST'])
+def draw():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    return render_template('draw.html')
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     # gets canvas image
     parseImg(request.get_data())
     # read parsed image
@@ -42,7 +49,7 @@ def data():
     d = d.reshape(-1, 1, 28, 28)
 
     print(d)
-    return render_template('index.html')
+    return render_template('draw.html') 
 
 
 @app.route('/login', methods=['GET', 'POST'])
