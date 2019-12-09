@@ -11,7 +11,7 @@ login_manager = LoginManager()
 def create_app(config_class=Config):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(config_class)
-
+    app.debug = True
     db.init_app(app)
     login.init_app(app)
     login.loginview = 'login'
