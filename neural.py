@@ -1,15 +1,16 @@
 import random
 import numpy as np
 
-class Network(object):
+class Network:
     def __init__(self, sizes):
         # sizes = number of sizes in each layer of the network. in this case it would be [784, 16, 16, 10]
-        self.num_layers = len(sizes)
-        self.sizes = sizes
+        self.num_layers = len(sizes) # integer
+        self.sizes = sizes # array of integers
         # initially all biases are randomized
-        self.biases = [np.random.randn(y,1) for y in sizes[1:]]
+        self.biases = [np.random.randn(y,1) for y in sizes[1:]] # array of floats
         # initially all weights (nodes) are randomized
-        self.weights = [np.random.randn(y,x) for x,y in zip(sizes[:-1], sizes[1:])]
+        self.weights = [np.random.randn(y,x) for x,y in zip(sizes[:-1], sizes[1:])] # array of floats
+        print("Weights and bias set up")
     
     def feedforward(self, a):
         # a is the input of the network (the image)
