@@ -1,5 +1,6 @@
 import mnist_loader
 import neural
+import numpy as np
 
 # def load_mnist(filename):
 #     # need to unzip the files before we can read from them
@@ -30,5 +31,11 @@ training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 training_data = list(training_data)
 
 # neural network with 4 layers:
-net = neural.Network([784, 16, 16, 10])
+net = neural.Network(sizes=[784, 16, 16, 10])
 net.training(training_data, 30, 10, 3.0, test_data=test_data)
+
+sizes, biases, weights = net.getNetwork()
+with open('net.txt', 'w') as f:
+    f.write('sizes: ' + str(sizes) + 'ENDSIZE\n')
+    f.write('biases: ' + str(biases) + 'ENDBIAS\n')
+    f.write('weights: ' + str(weights) + 'ENDWEIGHTS\n')
