@@ -2,74 +2,28 @@
 <html>
 
 <head>
-    <title>Number Recognition</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     {% block head %} {% endblock %}
+    {% block style %}{% endblock %}
 </head>
 
-{% block style %}{% endblock %}
+
 
 <body>
-    <nav class="navbar base-navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">Number Recognition</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto d-flex align-items-start">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
-                </li>
-            </ul>
-            <div class="my-2 my-lg-0 d-flex align-items-end">
-                <ul class="navbar-nav">
-                    {% if current_user.is_anonymous %}
-                    <li class="nav-item">
-                        <a class="nav-link login-btn" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link register-btn" href="#" data-toggle="modal"
-                            data-target="#registerModal">Register</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div id="block-content">
-        {% block content %}{% endblock %}
+    {% block body %}{% endblock %}
     </div>
+
+    {% block script %}{% endblock %}
+    <script>
+        $(document).ready(function () {
+            $("#block-content").animate({
+                opacity: '1'
+            }, "slow")
+        })
+    </script>
 </body>
-<script>
-    $(document).ready(function () {
-        $("#block-content").animate({
-            opacity: '1'
-        }, "slow")
-    })
-    $(function () {
-        $(document).scroll(function () {
-            var $nav = $(".navbar");
-            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        });
-    });
-</script>
+
+</html>
 
 </html>

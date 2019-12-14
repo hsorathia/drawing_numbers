@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-</head>
+
 {% endblock %}
 <!-- {% block style %}
 {% endblock %} -->
@@ -134,12 +134,15 @@
             Number Recognition - Copyright © 2019
         </div>
     </div>
+    
 {% endblock %}
 
-<script>
-    $(document).ready(function () {
-        $("#block-content").animate({
-            opacity: '1'
-        }, "slow")
-    })
-</script>
+{% block script %}
+        <script>
+            $(document).ready(function () {
+                $("#block-content").animate({
+                    opacity: '1'
+                }, "slow")
+            })
+        </script>
+    {% endblock %}
