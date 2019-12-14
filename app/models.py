@@ -18,6 +18,22 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+# neural network
+# class NN(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     num_layers = db.Column(db.Integer)
+#     biases = db.relationship('Bias', backref='Network')
+#     weights = db.relationship('Weight', backref='Network')
+
+# class Bias(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     value = db.Column(db.Integer)
+#     net = db.Column(db.Integer, db.ForeignKey('nn.id'))
+
+# class Weight(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     value = db.Column(db.Integer)
+#     net = db.Column(db.Integer, db.ForeignKey('nn.id'))
 
 @login.user_loader
 def load_user(id):
