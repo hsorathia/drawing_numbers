@@ -66,6 +66,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('home'))
         login_user(user)
+        return redirect(url_for('draw'))
     return redirect(url_for('home'))
 
 
@@ -78,11 +79,15 @@ def register():
         user = User(
             username=request.form["username"], email=request.form["email"])
         user.set_password(request.form["password"])
-        db.create_all()
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('home'))
+        if User.query.filter_by(username=request.form['username']).first():
+            flash('Username already taken')
+        else:    
+            db.create_all()
+            db.session.add(user)
+            db.session.commit()
+            flash('Congratulations, you are now a registered user!')
+            # login_user(user)
+            # return redirect(url_for('draw'))
     return redirect(url_for('home'))
 
 
