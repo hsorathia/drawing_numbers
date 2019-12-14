@@ -1,248 +1,251 @@
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Number Recognition</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-</head>
+{% block head %}
+<!-- <title>Number Recognition</title> -->
+<title>Number Recognition Landing</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+{% endblock %}
+<!-- {% block style %}
+{% endblock %} -->
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <a class="navbar-brand" href="#">Number Recognition</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto d-flex align-items-start">
+
+{% block body %}
+<nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
+
+    <a class="navbar-brand" href="#">Number Recognition</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto d-flex align-items-start">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}" style="color: white;"><b>Home</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0 d-flex align-items-end">
+            <ul class="navbar-nav">
+                {% if current_user.is_anonymous %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}" style="color: white;"><b>Home</b></a>
+                    <a class="nav-link login-btn" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
+                    <a class="nav-link register-btn" href="#" data-toggle="modal"
+                        data-target="#registerModal">Register</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
                 </li>
+                {% endif %}
             </ul>
-            <div class="my-2 my-lg-0 d-flex align-items-end">
-                <ul class="navbar-nav">
-                    {% if current_user.is_anonymous %}
-                    <li class="nav-item">
-                        <a class="nav-link login-btn" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link register-btn" href="#" data-toggle="modal"
-                            data-target="#registerModal">Register</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
         </div>
-    </nav>
-    <div class="header">
-        <div class="container" style="height: fit-content; min-height: 100%;">
-            <div class="header-content">
-                <div class="row landing">
-                    <div class="landing-title col-lg-6">
-                        <div style="margin-top: 330px;"></div>
-                        <h1>Number Recognition</h1>
-                        <p>Neural network application to identify user drawn numbers</p>
-                        <a href="#about"><button class="btn btn-outline-light">Learn More</button></a>
-                    </div>
-                    <div class="col-lg-6">
-                        <div style="margin-top: 230px;"></div>
-                        <img src="../static/images/growth.svg" class="img-fluid" width="600px" height="600px" alt="">
-                    </div>
+    </div>
+</nav>
+<div class="header">
+    <div class="container" style="height: fit-content; min-height: 100%;">
+        <div class="header-content">
+            <div class="row landing">
+                <div class="landing-title col-lg-6">
+                    <div style="margin-top: 330px;"></div>
+                    <h1>Number Recognition</h1>
+                    <p>Neural network application to identify user drawn numbers</p>
+                    <a href="#about"><button class="btn btn-outline-light">Learn More</button></a>
+                </div>
+                <div class="col-lg-6">
+                    <div style="margin-top: 230px;"></div>
+                    <img src="../static/images/growth.svg" class="img-fluid" width="600px" height="600px" alt="">
                 </div>
             </div>
         </div>
-        <div class="about-section container-fluid" id="about" style="min-height: 100vh;">
-            <div class="row d-flex justify-content-center" style="margin-top: 120px;">
-                <h1>About</h1>
+    </div>
+    <div class="about-section container-fluid" id="about" style="min-height: 100vh;">
+        <div class="row d-flex justify-content-center" style="margin-top: 120px;">
+            <h1>About</h1>
+        </div>
+        <div class="row" style="margin-top: 120px;">
+            <div class="col-lg-6 about-img">
+                <img src="../static/images/analysis.svg" alt="" class="img-fluid" width="700px" height="700px">
             </div>
-            <div class="row" style="margin-top: 120px;">
-                <div class="col-lg-6 about-img">
-                    <img src="../static/images/analysis.svg" alt="" class="img-fluid" width="700px" height="700px">
-                </div>
-                <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px;">
-                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Users will draw and save a number onto our
-                        drawing canvas.</h5>
-                    <br>
-                    <br>
-                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Once saved, the image will be sent to the
-                        backend for number
-                        prediction. </h5>
-                    <br>
-                    <br>
-                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> The image will be converted into a 28x28px
-                        image and converted
-                        into readable data.</h5>
-                    <br>
-                    <br>
-                    <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Data will be fed into our neural network
-                        and
-                        output the
-                        prediction onto the frontend.</h5>
-                    <br>
-                </div>
+            <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px;">
+                <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Users will draw and save a number onto our
+                    drawing canvas.</h5>
+                <br>
+                <br>
+                <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Once saved, the image will be sent to the
+                    backend for number
+                    prediction. </h5>
+                <br>
+                <br>
+                <h5 class="text-blob"><i class="fas fa-arrow-right"></i> The image will be converted into a 28x28px
+                    image and converted
+                    into readable data.</h5>
+                <br>
+                <br>
+                <h5 class="text-blob"><i class="fas fa-arrow-right"></i> Data will be fed into our neural network
+                    and
+                    output the
+                    prediction onto the frontend.</h5>
+                <br>
             </div>
         </div>
-        <div class="neural-section" style="min-height: 170vh; height: fit-content;">
-            <img class="wave-flip" src="../static/images/wave-bottom.svg" alt="">
-            <div class="row d-flex justify-content-center" style="margin-top: 50px;">
-                <h1>Neural Network</h1>
+    </div>
+    <div class="neural-section" style="min-height: 170vh; height: fit-content;">
+        <img class="wave-flip" src="../static/images/wave-bottom.svg" alt="">
+        <div class="row d-flex justify-content-center" style="margin-top: 50px;">
+            <h1>Neural Network</h1>
+        </div>
+        <div class="row" style="margin-top: 90px;">
+            <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px; text-align: center;">
+                <h4>Our neural network is constructed from scratch using <strong><u>NumPy</u></strong></h4>
+                <br>
+                <h5>Along with the <strong><u>MNIST</u></strong> dataset to train our network.</h5>
+                <br><br>
+                <h5>1 Input Layer</h5>
+                <h5>2 Hidden Layers</h5>
+                <h5>1 Output Layer</h5>
+                <br><br>
+                <div style="padding: 0 70px;">
+                    <h5><i class="fas fa-arrow-right"></i> Feedforward function for dataset</h5>
+                    <h5><i class="fas fa-arrow-right"></i> Split training data into batches</h5>
+                    <h5><i class="fas fa-arrow-right"></i> Backwards propagation to adjust values</h5>
+                </div>
             </div>
-            <div class="row" style="margin-top: 90px;">
-                <div class="col-lg-6" style="margin-top: 60px; padding-right: 55px; text-align: center;">
-                    <h4>Our neural network is constructed from scratch using <strong><u>NumPy</u></strong></h4>
-                    <br>
-                    <h5>Along with the <strong><u>MNIST</u></strong> dataset to train our network.</h5>
-                    <br><br>
-                    <h5>1 Input Layer</h5>
-                    <h5>2 Hidden Layers</h5>
-                    <h5>1 Output Layer</h5>
-                    <br><br>
-                    <div style="padding: 0 70px;">
-                        <h5><i class="fas fa-arrow-right"></i> Feedforward function for dataset</h5>
-                        <h5><i class="fas fa-arrow-right"></i> Split training data into batches</h5>
-                        <h5><i class="fas fa-arrow-right"></i> Backwards propagation to adjust values</h5>
-                    </div>
-                </div>
-                <div class="col-lg-6 about-img">
-                    <img src="../static/images/neural.svg" alt="" class="img-fluid" width="700px" height="700px">
-                </div>
+            <div class="col-lg-6 about-img">
+                <img src="../static/images/neural.svg" alt="" class="img-fluid" width="700px" height="700px">
             </div>
         </div>
-        <div class="contact-section container-fluid" style="height: 70vh;">
-            <div class="row d-flex justify-content-center" style="margin-top: 60px;">
-                <div id="contact">
-                    <h1 class="h-center"><span class="underline">Contact Us</span></h1>
-                    <br>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="contact-question">
-                                    <p>Have a question?
-                                    </p>
-                                </div>
-                                <div class="contact-form" id="main-contact">
-                                    <form id="contact-form" name="contact-form" action="" method="POST">
-                                        <div class="row">
-                                            <!-- TO DO VALIDATION -->
-                                            <div class="col-sm-12 col-md-12  mb-2">
-                                                <input name="name" type="text" class="form-control center-block"
-                                                    placeholder="Name" id="contact-name" required>
-                                            </div>
-                                            <div class="col-sm-12 col-md-12  mb-2">
-                                                <input name="email" type="email" class="form-control center-block"
-                                                    placeholder="Email" id="contact-email" required>
-                                            </div>
-                                            <div class="col-sm-12 col-md-12  mb-2">
-                                                <textarea name="message" class="form-control center-block"
-                                                    placeholder="Message" rows="6" id="contact-message"
-                                                    required></textarea>
-                                            </div>
-                                            <div class="col-sm-12 col-md-12  mb-2">
-                                                <input type="submit" class="btn btn-outline-dark" value="Submit">
-                                            </div>
+    </div>
+    <div class="contact-section container-fluid" style="height: 70vh;">
+        <div class="row d-flex justify-content-center" style="margin-top: 60px;">
+            <div id="contact">
+                <h1 class="h-center"><span class="underline">Contact Us</span></h1>
+                <br>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="contact-question">
+                                <p>Have a question?
+                                </p>
+                            </div>
+                            <div class="contact-form" id="main-contact">
+                                <form id="contact-form" name="contact-form" action="" method="POST">
+                                    <div class="row">
+                                        <!-- TO DO VALIDATION -->
+                                        <div class="col-sm-12 col-md-12  mb-2">
+                                            <input name="name" type="text" class="form-control center-block"
+                                                placeholder="Name" id="contact-name" required>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-sm-12 col-md-12  mb-2">
+                                            <input name="email" type="email" class="form-control center-block"
+                                                placeholder="Email" id="contact-email" required>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12  mb-2">
+                                            <textarea name="message" class="form-control center-block"
+                                                placeholder="Message" rows="6" id="contact-message" required></textarea>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12  mb-2">
+                                            <input type="submit" class="btn btn-outline-dark" value="Submit">
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer">
-            Number Recognition - Copyright © 2019
-        </div>
     </div>
+    <div class="footer">
+        Number Recognition - Copyright © 2019
+    </div>
+</div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="login-btn" data-toggle="modal" data-target="#loginModal"><b>Login</b></button>
-                    <button class="register-btn" data-toggle="modal" data-target="#registerModal">Register</button>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm" action="/login" method="post">
-                        {{ form_login.hidden_tag() }}
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
-                            {{ form_login.username(class_="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            {{ form_login.password(class_="form-control") }}
-                        </div>
-                        {{ form_login.submit(class_="btn btn-primary") }}
-                        <br>
-                    </form>
-                </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="login-btn" data-toggle="modal" data-target="#loginModal"><b>Login</b></button>
+                <button class="register-btn" data-toggle="modal" data-target="#registerModal">Register</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" action="/login" method="post">
+                    {{ form_login.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        {{ form_login.username(class_="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        {{ form_login.password(class_="form-control") }}
+                    </div>
+                    {{ form_login.submit(class_="btn btn-primary") }}
+                    <br>
+                </form>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="login-btn" data-toggle="modal" data-target="#loginModal">Login</button>
-                    <button class="register-btn" data-toggle="modal"
-                        data-target="#registerModal"><b>Register</b></button>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="registerForm" action="/register" method="post">
-                        {{ form_register.hidden_tag() }}
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Username</label>
-                            {{ form_register.username(class_="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            {{ form_register.email(class_="form-control") }}
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            {{ form_register.password(class_="form-control") }}
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Repeat Password</label>
-                            {{ form_register.password2(class_="form-control") }}
-                        </div>
-                        {{ form_register.submit(class_="btn btn-primary") }}
-                    </form>
-                </div>
+</div>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="login-btn" data-toggle="modal" data-target="#loginModal">Login</button>
+                <button class="register-btn" data-toggle="modal" data-target="#registerModal"><b>Register</b></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm" action="/register" method="post">
+                    {{ form_register.hidden_tag() }}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        {{ form_register.username(class_="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                        {{ form_register.email(class_="form-control") }}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        {{ form_register.password(class_="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Repeat Password</label>
+                        {{ form_register.password2(class_="form-control") }}
+                    </div>
+                    {{ form_register.submit(class_="btn btn-primary") }}
+                </form>
             </div>
         </div>
     </div>
+</div>
 
-</body>
+{% endblock %}
 
-</html>
 
+{% block script %}
 <script>
     $(document).ready(function () {
         $("#block-content").animate({
@@ -274,3 +277,4 @@
         });
     });
 </script>
+{% endblock %}

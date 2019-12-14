@@ -69,7 +69,7 @@ def data():
         # print(arr)
         return arr
 
-    ### retrieve data
+    # retrieve data
     # load sizes
     fsizes = open('nn_sizes.pkl', 'rb')
     sizes = pickle.load(fsizes)
@@ -95,9 +95,9 @@ def data():
     arr = np.reshape(arr, (784,1))
     arr = (255-arr)/256
     result = (net.feedforward(arr))
-    [print(i, "|", x) for i,x in enumerate(result)]
+    [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
-    print ("result:", np.argmax(result))
+    print("result:", np.argmax(result))
 
     return render_template('draw.html')
 
@@ -113,6 +113,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('home'))
         login_user(user)
+        return redirect(url_for('draw'))
     return redirect(url_for('home'))
 
 
@@ -125,11 +126,15 @@ def register():
         user = User(
             username=request.form["username"], email=request.form["email"])
         user.set_password(request.form["password"])
-        db.create_all()
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('home'))
+        if User.query.filter_by(username=request.form['username']).first():
+            flash('Username already taken')
+        else:
+            db.create_all()
+            db.session.add(user)
+            db.session.commit()
+            flash('Congratulations, you are now a registered user!')
+            # login_user(user)
+            # return redirect(url_for('draw'))
     return redirect(url_for('home'))
 
 
@@ -141,11 +146,15 @@ def logout():
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     user = current_user
     return render_template('profile.html', username=user.username)
 
 
 def parseImg(imageData):
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     # parse canvas image bytes and save as result.png
     imageString = re.search(b'base64,(.*)', imageData).group(1)
     with open('result.png', 'wb') as result:

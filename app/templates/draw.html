@@ -8,7 +8,47 @@
 </style>
 {% endblock %}
 
-{% block content %}
+
+{% block body %}
+<title>Number Recognition Drawing</title>
+<nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
+
+    <a class="navbar-brand" href="#">Number Recognition</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto d-flex align-items-start">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('draw') }}" style="color: white;"><b>Draw</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
+            </li>
+        </ul>
+        <div class="my-2 my-lg-0 d-flex align-items-end">
+            <ul class="navbar-nav">
+                {% if current_user.is_anonymous %}
+                <li class="nav-item">
+                    <a class="nav-link login-btn" href="#" data-toggle="modal" data-target="#loginModal">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link register-btn" href="#" data-toggle="modal"
+                        data-target="#registerModal">Register</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="header" id="drawing">
     <div class="drawing-page" style="padding-top: 200px; text-align: center;">
         <h2>Draw A Number</h2>
@@ -22,7 +62,6 @@
     </div>
 
 </div>
-
 <script>
     function fillCanvasBackgroundWithColor(canvas, color) {
         // Get the 2D drawing context from the provided canvas.
