@@ -99,8 +99,7 @@ def data():
     my_guess = np.argmax(result)
     print ("result:", np.argmax(result))
 
-
-    return render_template('draw.html', guess=my_guess)
+    return render_template('draw.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
