@@ -10,7 +10,9 @@
 
 
 {% block body %}
+<title>Number Recognition Drawing</title>
 <nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
+
     <a class="navbar-brand" href="#">Number Recognition</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,8 +23,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
-            <li>
-                <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('draw') }}" style="color: white;"><b>Draw</b></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
             </li>
         </ul>
         <div class="my-2 my-lg-0 d-flex align-items-end">
@@ -44,19 +49,19 @@
         </div>
     </div>
 </nav>
-<div id="drawing">
-    <canvas id="canvas" style="border: 1px solid black;">
-
-    </canvas>
-    <div class="row buttons">
-
+<div class="header" id="drawing">
+    <div class="drawing-page" style="padding-top: 200px; text-align: center;">
+        <h2>Draw A Number</h2>
+        <canvas id="canvas" style="border: 1px solid black;">
+        </canvas>
+    </div>
+    <div class="row buttons d-flex justify-content-center">
         <a id="download" download="image.png"><button type="button" class="btn btn-primary"
                 onClick="sendData()">Save</button></a>
         <button class="btn btn-danger" id="clear">Clear</button>
     </div>
 
 </div>
-
 <script>
     function fillCanvasBackgroundWithColor(canvas, color) {
         // Get the 2D drawing context from the provided canvas.

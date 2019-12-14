@@ -53,6 +53,7 @@ def data():
     d = np.asarray(d)
     # reshape the data to feed into NN
     d = d.reshape(-1, 1, 28, 28)
+
     def prepImage():
         """
         Turns image from png to a 2d grayscale array
@@ -69,7 +70,7 @@ def data():
         # print(arr)
         return arr
 
-    ### retrieve data
+    # retrieve data
     # load sizes
     fsizes = open('nn_sizes.pkl', 'rb')
     sizes = pickle.load(fsizes)
@@ -95,9 +96,9 @@ def data():
     arr = np.reshape(arr, 784)
     arr = [(255-x)/256 for x in arr]
     result = (net.feedforward(arr))
-    [print(i, "|", x) for i,x in enumerate(result)]
+    [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
-    print ("result:", np.argmax(result))
+    print("result:", np.argmax(result))
 
     return render_template('draw.html')
 
@@ -128,7 +129,7 @@ def register():
         user.set_password(request.form["password"])
         if User.query.filter_by(username=request.form['username']).first():
             flash('Username already taken')
-        else:    
+        else:
             db.create_all()
             db.session.add(user)
             db.session.commit()
@@ -146,11 +147,15 @@ def logout():
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     user = current_user
     return render_template('profile.html', username=user.username)
 
 
 def parseImg(imageData):
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     # parse canvas image bytes and save as result.png
     imageString = re.search(b'base64,(.*)', imageData).group(1)
     with open('result.png', 'wb') as result:
