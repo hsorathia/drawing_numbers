@@ -7,6 +7,14 @@ body{
     
     overflow-x: hidden;
 }
+/* DRAWING PAGE */
+.drawing {
+    background: url(../images/header-cover.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
 /* LANDING PAGE */
 .header{
     background: url(../images/header-cover.jpg);

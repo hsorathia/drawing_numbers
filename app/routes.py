@@ -49,7 +49,7 @@ def data():
 
     img = mpimg.imread('result.png')
     imgplot = plt.imshow(img)
-    plt.show()
+    # plt.show(imgplot)
     d = np.asarray(d)
     # reshape the data to feed into NN
     d = d.reshape(-1, 1, 28, 28)
@@ -95,6 +95,7 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, 784)
     arr = [(255-x)/256 for x in arr]
+    print(arr)
     result = (net.feedforward(arr))
     [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
