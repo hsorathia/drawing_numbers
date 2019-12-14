@@ -44,9 +44,9 @@ def data():
     d = d.resize((28, 28))
     d.save('result.png')
 
-    img = mpimg.imread('result.png')
-    imgplot = plt.imshow(img)
-    plt.show()
+    # img = mpimg.imread('result.png')
+    # imgplot = plt.imshow(img)
+    # plt.show()
     d = np.asarray(d)
     # reshape the data to feed into NN
     d = d.reshape(-1, 1, 28, 28)
