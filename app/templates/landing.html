@@ -15,8 +15,10 @@
 <!-- {% block style %}
 {% endblock %} -->
 
+
 {% block body %}
     <nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
+
         <a class="navbar-brand" href="#">Number Recognition</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto d-flex align-items-start">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    <a class="nav-link" href="{{ url_for('home') }}" style="color: white;"><b>Home</b></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
                 </li>
                 <li>
                     <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
@@ -58,7 +66,7 @@
                         <div style="margin-top: 330px;"></div>
                         <h1>Number Recognition</h1>
                         <p>Neural network application to identify user drawn numbers</p>
-                        <button class="btn btn-outline-light">Learn More</button>
+                        <a href="#about"><button class="btn btn-outline-light">Learn More</button></a>
                     </div>
                     <div class="col-lg-6">
                         <div style="margin-top: 230px;"></div>
@@ -67,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class="about-section container-fluid" style="min-height: 100vh;">
+        <div class="about-section container-fluid" id="about" style="min-height: 100vh;">
             <div class="row d-flex justify-content-center" style="margin-top: 120px;">
                 <h1>About</h1>
             </div>

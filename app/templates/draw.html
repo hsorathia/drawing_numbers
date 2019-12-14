@@ -1,27 +1,13 @@
 {% extends "base.html" %}
-{% block head %}
-<meta charset="utf-8">
-<title>CMPE130</title>
-<meta name="author" content="">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-{% endblock %}
 {% block style %}
 <style>
-    .buttons {
-        margin-left: 30px;
-    }
-
     .btn {
         margin: 10px;
     }
 </style>
 {% endblock %}
+
 
 {% block body %}
 <nav class="navbar navbar-expand-lg  navbar-dark fixed-top">
@@ -63,10 +49,12 @@
 
     </canvas>
     <div class="row buttons">
+
         <a id="download" download="image.png"><button type="button" class="btn btn-primary"
                 onClick="sendData()">Save</button></a>
         <button class="btn btn-danger" id="clear">Clear</button>
     </div>
+
 </div>
 
 <script>
@@ -108,8 +96,8 @@
         ctx.globalCompositeOperation = 'destination-over';
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        canvas.height = 328;
-        canvas.width = 328;
+        canvas.height = 300;
+        canvas.width = 300;
 
         let paint = false;
 
@@ -128,12 +116,12 @@
             if (paint == false) {
                 return;
             }
-            ctx.lineWidth = 10;
+            ctx.lineWidth = 25;
             ctx.lineCap = "round";
-            ctx.lineTo(e.clientX, e.clientY);
+            ctx.lineTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(e.clientX, e.clientY);
+            ctx.moveTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
         }
 
         // event listener

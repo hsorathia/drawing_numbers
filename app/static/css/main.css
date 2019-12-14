@@ -1,8 +1,13 @@
+html {
+    scroll-behavior: smooth;
+    font-size: tahoma;
+}
 body{
     font-size: tahoma;
     
     overflow-x: hidden;
 }
+/* LANDING PAGE */
 .header{
     background: url(../images/header-cover.jpg);
     background-size: cover;
@@ -109,4 +114,62 @@ body{
     min-width: 150%;
     background-image: url(../images/wave-bottom.svg);
     height: 275px;
+}
+/* DRAW PAGE */
+.drawing-page{
+    color: white;
+}
+#canvas{
+    background-color: white;
+}
+
+/* PROFILE PAGE */
+.profile-content1{
+    z-index: 1;
+    position: relative;
+}
+.profile-content1 h1{
+    font-weight: bold;
+    text-transform: capitalize;
+    color: white;
+}
+.profile-content1 p{
+    font-size: 20px;
+    margin: 20px 0 25px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-transform: capitalize;
+    color: white;
+}
+.profile-content2 {
+    height: 100%;
+    min-height: 100%;
+}
+.fa-arrow-down{
+    color: white;
+    font-size: 2em;
+    animation: bounce 1s infinite;
+}
+.fa-arrow-down:hover{
+    cursor: pointer;
+}
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -webkit-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
 }

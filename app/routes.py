@@ -15,6 +15,9 @@ import re
 import base64
 import sys
 import os
+import pickle
+import neural
+
 sys.path.append(os.path.abspath("./model"))
 
 
@@ -50,8 +53,52 @@ def data():
     d = np.asarray(d)
     # reshape the data to feed into NN
     d = d.reshape(-1, 1, 28, 28)
+    def prepImage():
+        """
+        Turns image from png to a 2d grayscale array
+        """
+        # open image
+        img = Image.open("result.png", 'r')
+        # img.show()
+        # resize image
+        img = img.resize((28, 28), Image.ANTIALIAS)
+        # make grayscale
+        img = img.convert('L')
+        # img.show()
+        arr = np.array(img)
+        # print(arr)
+        return arr
 
-    print(d)
+    ### retrieve data
+    # load sizes
+    fsizes = open('nn_sizes.pkl', 'rb')
+    sizes = pickle.load(fsizes)
+    fsizes.close()
+
+    # load biases
+    fbiases = open('nn_biases.pkl', 'rb')
+    biases = pickle.load(fbiases)
+    fbiases.close()
+
+    # load weights
+    fweights = open('nn_weights.pkl', 'rb')
+    weights = pickle.load(fweights)
+    fweights.close()
+
+    # set up neural network based on file
+    net = neural.Network(sizes=sizes)
+    net.loadNodes(biases=biases, weights=weights)
+
+    # running neural network
+    arr = prepImage()
+    # convert arr to 1d
+    arr = np.reshape(arr, 784)
+    arr = [(255-x)/256 for x in arr]
+    result = (net.feedforward(arr))
+    [print(i, "|", x) for i,x in enumerate(result)]
+    my_guess = np.argmax(result)
+    print ("result:", np.argmax(result))
+
     return render_template('draw.html')
 
 
@@ -95,6 +142,12 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    user = current_user
+    return render_template('profile.html', username=user.username)
 
 
 def parseImg(imageData):
