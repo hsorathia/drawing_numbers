@@ -78,3 +78,8 @@ def vectorized_result(j):
     e = np.zeros((10, 1))
     e[j] = 1.0
     return e
+
+# understanding the data
+# training_data, validation_data, test_data = load_data_wrapper()
+# data, res = zip(*test_data)
+# print(data[0])
