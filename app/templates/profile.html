@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <div class="container-fluid profile-content1" style="min-height: 100vh;">
+        <div class="row landing">
+            <div class="landing-title col-lg-12">
+                <div style="margin-top: 200px;"></div>
+                <h1>View Saved Drawings</h1>
+            </div>
+        </div>
+        <div class="row landing">
+            <div class="col-lg-12">
+                <div style="margin-top: 50px;"></div>
+                <img src="../static/images/draw.svg" class="img-fluid" width="400px" height="400px" alt="">
+            </div>
+        </div>
+        <div class="row landing">
+            <div class="col-lg-12">
+                <div style="margin-top: 70px;"></div>
+                <a href="#drawings" id="drawings"><i class="fas fa-arrow-down"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid profile-content2" style="min-height: 100vh; margin-top: 50px;">
+        <!--  USE FLASK FOR LOOP TO PRINT ALL SAVED IMAGES IN A CARD  -->
+        <div class="card" style="width: 18rem;">
+            <img src="https://www.quickanddirtytips.com/sites/default/files/images/469/how-to-write-numbers-compressor.png"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Card description.</p>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -92,6 +92,12 @@ def logout():
     return redirect(url_for('home'))
 
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    user = current_user
+    return render_template('profile.html', username=user.username)
+
+
 def parseImg(imageData):
     # parse canvas image bytes and save as result.png
     imageString = re.search(b'base64,(.*)', imageData).group(1)
