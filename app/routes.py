@@ -24,11 +24,13 @@ def home():
     form_register = RegisterForm()
     return render_template('landing.html', form_login=form_login, form_register=form_register)
 
+
 @app.route('/draw', methods=['GET', 'POST'])
 def draw():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     return render_template('draw.html')
+
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
@@ -41,6 +43,7 @@ def data():
     # resize image to 28x28
     d = d.resize((28, 28))
     d.save('result.png')
+
     img = mpimg.imread('result.png')
     imgplot = plt.imshow(img)
     plt.show()
@@ -49,7 +52,7 @@ def data():
     d = d.reshape(-1, 1, 28, 28)
 
     print(d)
-    return render_template('draw.html') 
+    return render_template('draw.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])

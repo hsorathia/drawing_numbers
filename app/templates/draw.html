@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block head %}
-    <meta charset="utf-8">
-    <title>CMPE130</title>
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<title>CMPE130</title>
+<meta name="author" content="">
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 {% endblock %}
 {% block style %}
@@ -24,79 +24,95 @@
 {% endblock %}
 
 {% block content %}
-    <div id="drawing">
-        <canvas id="canvas" style="border: 1px solid black;">
+<div id="drawing">
+    <canvas id="canvas" style="border: 1px solid black;">
 
-        </canvas>
-        <div class="row buttons">
-            <a id="download" download="image.png"><button type="button" class="btn btn-primary"
-                    onClick="sendData()">Save</button></a>
-            <button class="btn btn-danger" id="clear">Clear</button>
-        </div>
+    </canvas>
+    <div class="row buttons">
+        <a id="download" download="image.png"><button type="button" class="btn btn-primary"
+                onClick="sendData()">Save</button></a>
+        <button class="btn btn-danger" id="clear">Clear</button>
     </div>
+</div>
 
-    <script>
-        // download canvas
-        function sendData() {
-            var obj = document.getElementById("canvas");
-            var img = obj.toDataURL('image/png');
-            $.ajax({
-                type: "POST",
-                url: "/data",
-                data: img,
-                success: function (data) {
-                    console.log("Sent")
-                }
-            });
-            /*
-            var download = document.getElementById("download");
-            var image = document.getElementById("canvas").toDataURL("image/png")
-                .replace("image/png", "image/octet-stream");
-            download.setAttribute("href", image);
-            */
-        }
-        window.addEventListener("load", () => {
-            const canvas = document.querySelector("#canvas");
-            const ctx = canvas.getContext("2d");
-            canvas.height = 328;
-            canvas.width = 328;
+<script>
+    function fillCanvasBackgroundWithColor(canvas, color) {
+        // Get the 2D drawing context from the provided canvas.
+        const context = canvas.getContext('2d');
+        context.save();
+        context.globalCompositeOperation = 'destination-over';
+        context.fillStyle = color;
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.restore();
+    }
 
-            let paint = false;
-
-            function start(e) {
-                paint = true;
-                btn = e.button;
-                if (btn === 0) {
-                    draw(e);
-                }
+    // download canvas
+    function sendData() {
+        var obj = document.getElementById("canvas");
+        fillCanvasBackgroundWithColor(obj, 'white');
+        var img = obj.toDataURL('image/png');
+        console.log(img)
+        $.ajax({
+            type: "POST",
+            url: "/data",
+            data: img,
+            success: function (data) {
+                console.log("Sent")
             }
-            function end() {
-                paint = false;
-                ctx.beginPath();
-            }
-            function draw(e) {
-                if (paint == false) {
-                    return;
-                }
-                ctx.lineWidth = 10;
-                ctx.lineCap = "round";
-                ctx.lineTo(e.clientX, e.clientY);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(e.clientX, e.clientY);
-            }
-
-            // event listener
-            canvas.addEventListener('mousedown', start);
-            canvas.addEventListener('mouseup', end);
-            canvas.addEventListener('mousemove', draw)
-
-            // clear canvas
-            document.getElementById("clear").addEventListener("click", function () {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            })
-
         });
+        /*
+        var download = document.getElementById("download");
+        var image = document.getElementById("canvas").toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+        */
+    }
+    window.addEventListener("load", () => {
+        const canvas = document.querySelector("#canvas");
+        const ctx = canvas.getContext("2d");
+        // set the ctx to draw beneath your current content
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        canvas.height = 328;
+        canvas.width = 328;
 
-    </script>
+        let paint = false;
+
+        function start(e) {
+            paint = true;
+            btn = e.button;
+            if (btn === 0) {
+                draw(e);
+            }
+        }
+        function end() {
+            paint = false;
+            ctx.beginPath();
+        }
+        function draw(e) {
+            if (paint == false) {
+                return;
+            }
+            ctx.lineWidth = 10;
+            ctx.lineCap = "round";
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX, e.clientY);
+        }
+
+        // event listener
+        canvas.addEventListener('mousedown', start);
+        canvas.addEventListener('mouseup', end);
+        canvas.addEventListener('mousemove', draw)
+
+        // clear canvas
+        document.getElementById("clear").addEventListener("click", function () {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        })
+
+    });
+
+</script>
 {% endblock %}
