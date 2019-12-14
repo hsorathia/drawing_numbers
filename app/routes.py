@@ -50,9 +50,9 @@ def data():
     img = mpimg.imread('result.png')
     imgplot = plt.imshow(img)
     plt.show()
-    d = np.asarray(d)
-    # reshape the data to feed into NN
-    d = d.reshape(-1, 1, 28, 28)
+    # d = np.asarray(d)
+    # # reshape the data to feed into NN
+    # d = d.reshape(-1, 1, 28, 28)
     def prepImage():
         """
         Turns image from png to a 2d grayscale array
@@ -92,8 +92,8 @@ def data():
     # running neural network
     arr = prepImage()
     # convert arr to 1d
-    arr = np.reshape(arr, 784)
-    arr = [(255-x)/256 for x in arr]
+    arr = np.reshape(arr, (784,1))
+    arr = (255-arr)/256
     result = (net.feedforward(arr))
     [print(i, "|", x) for i,x in enumerate(result)]
     my_guess = np.argmax(result)
