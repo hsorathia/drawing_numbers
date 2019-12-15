@@ -21,8 +21,8 @@ A neural network is both an algorithm and data structure. Although the neural ne
 Aside from the neural network, we also used a variety of algorithms in our website. They are documented through sphinx documentation. 
 
 ## Data structures
-The data structure used most in our project is lists. Our neural network consists of three main lists: size, biases, weights. 
-
+The data structure used most in our project is lists. Our neural network consists of three main lists: size, biases, weights. We also used lists in the back-end of the website. This was so we could store the information of the user generated numbers (their images), and the guessed value so the user
+could view and remove them later.
 
 
 # Complexity analysis
@@ -65,13 +65,18 @@ PIL stands for Python imaging library and is also known as Pillow. PIL comes wit
 Numpy is a python library that comes with utilities for linear algebra. It provids more efficient methods of array manipulation. In our neural network, we used this for shuffling, randomizing, dot products, and finding the index of the maximum value.
 
 ## MNIST
-MNIST provided a dataset of handwritten digits to train our neural network in. We used this in `mnist_loader.py` to return the test cases.
+MNIST provided a dataset of 10,000 handwritten digits which we used to train our neural network in. We used this in `mnist_loader.py` to return the test cases.
 
 ## Flask
-We used flask to design the framework of our website.
+We used flask, which is a package for Python that can serve as a micro-web framework. We utilzed this to serve as the controller for our website so the user could navigate and route through different web pages with ease.
+
+## Boostrap 
+We utilized bootstrap and it's dependencies to make our website look much prettier.
 
 ## Heroku
-We deployed our website on heroku.
+We deployed our website on heroku, and it was successfully deployed on [here](https://drawing-numbers.herokuapp.com/).
+
+https://drawing-numbers.herokuapp.com/
 
 ## Sphinx documentation
 We used sphinx documentation to document our functions and code. 
@@ -93,5 +98,11 @@ This project really tested the abilities of our group. This project was a new co
 ### Calvin
 
 ### Habib
-
+<ul>
+<li>Created initial loader for mnist data</li>
+<li>Created flask template and routes for website</li>
+<li>Created login/register/logout functionality</li>
+<li>Displayed cards onto profile page</li>
+<li>Deployed project to herokun</li>
+</ul>
 ### Wilson
