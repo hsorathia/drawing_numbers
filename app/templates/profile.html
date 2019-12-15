@@ -63,6 +63,11 @@
     </div>
     <div class="container-fluid profile-content2" style="min-height: 100vh; margin-top: 50px;">
         <!--  USE FLASK FOR LOOP TO PRINT ALL SAVED IMAGES IN A CARD  -->
+        {% if usernumbers %}
+            <div class="row">
+                <a href="#" style="margin-left: auto; margin-right: auto;" class="btn btn-danger delete-btn-2">Delete All</a>
+            </div>
+        {% endif %}
         <div class="row">
             {% for i in range(usernumbers|length) %}
             <div class="col-md-3 number-card-col">
@@ -87,18 +92,30 @@
 
 {% block script %}
 <script>
-$(document).ready(function () {
-    $(".delete-btn").click(function (e) {
-        console.log(this.id)
-        $.ajax({
-            url: '/delete/'+this.id,
-            type: 'post'
-        }).done(function () {
-            location.reload();
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            location.reload();
-        });
+    $(document).ready(function () {
+        $(".delete-btn").click(function (e) {
+            console.log(this.id)
+            $.ajax({
+                url: '/delete/'+this.id,
+                type: 'post'
+            }).done(function () {
+                location.reload();
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            });
+        })
     })
-})
+    $(document).ready(function () {
+        $(".delete-btn-2").click(function (e) {
+            $.ajax({
+                url: '/delete/all/',
+                type: 'post'
+            }).done(function () {
+                location.reload();
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                location.reload();
+            });
+        })
+    })
 </script>
 {% endblock %}

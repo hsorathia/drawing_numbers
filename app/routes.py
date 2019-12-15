@@ -111,7 +111,6 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, (784, 1))
     arr = (255-arr)/256
-
     # print(arr)
     result = (net.feedforward(arr))
     # [print(i, "|", x) for i, x in enumerate(result)]
@@ -208,6 +207,17 @@ def delete(id):
     userNums = UserNumbers.query.filter_by(id=id).first()
     db.create_all()
     db.session.delete(userNums)
+    db.session.commit()
+
+@app.route('/delete/all/', methods=['POST'])
+def deleteAll():
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = current_user
+    usernumbers = user.usernumbers.all()
+    db.create_all()
+    for numbers in usernumbers:
+        db.session.delete(numbers)
     db.session.commit()
 
 @app.route('/get', methods=['GET', 'POST'])
