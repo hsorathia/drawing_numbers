@@ -18,7 +18,7 @@ import pickle
 import neural
 
 sys.path.append(os.path.abspath("./model"))
-
+tempGuess = None
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -124,6 +124,8 @@ def data():
     db.session.add(usernumber)
     db.session.commit()
     print(usernumber)
+    global tempGuess
+    tempGuess = int(my_guess)
     return render_template('draw.html')
 
 
@@ -195,7 +197,6 @@ def profile():
         information.append(numbers.id)
         #print(information)
         final.append(information)
-
     return render_template('profile.html', username=user.username, usernumbers=final)
 
 
@@ -208,8 +209,11 @@ def delete(id):
     db.create_all()
     db.session.delete(userNums)
     db.session.commit()
-    
 
+@app.route('/get', methods=['GET', 'POST'])
+def get_data():
+    if request.method == "GET":
+        return str(tempGuess)
 
 def parseImg(imageData):
     """
