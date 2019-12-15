@@ -63,15 +63,19 @@
     </div>
     <div class="container-fluid profile-content2" style="min-height: 100vh; margin-top: 50px;">
         <!--  USE FLASK FOR LOOP TO PRINT ALL SAVED IMAGES IN A CARD  -->
-        <div class="card" style="width: 18rem;">
-            <img src="https://www.quickanddirtytips.com/sites/default/files/images/469/how-to-write-numbers-compressor.png"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Card description.</p>
-                <a href="#" class="btn btn-danger">Delete</a>
+        {% for numbers in final %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{numbers[0]}}"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                        <h5 class="card-title">drawing</h5>
+                        <p class="card-text">This number is: {{numbers[2]}}</p>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                        
+                    
+                </div>
             </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 

@@ -5,7 +5,7 @@ from flask import current_app as app
 from . import db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import LoginForm, RegisterForm
-from app.models import User
+from app.models import User, UserNumbers
 from werkzeug.urls import url_parse
 import numpy as np
 from PIL import Image, ImageEnhance
@@ -50,15 +50,16 @@ def data():
         return redirect(url_for('home'))
     # gets canvas image
     parseImg(request.get_data())
+    # print(request.get_data())
     # read parsed image
-    d = Image.open('result.png', 'r')
+    # d = Image.open('result.png', 'r')
     # resize image to 28x28
-    d = d.resize((28, 28))
-    enhancer = ImageEnhance.Sharpness(d)
-    d = enhancer.enhance(0.15)
-    d.save('result.png')
+    # d = d.resize((20,20))
+    # d = d.resize((28, 28), Image.ANTIALIAS)
+    # d.save('result.png')
 
-    img = mpimg.imread('result.png')
+    # img = mpimg.imread('result.png')
+    # print(img)
     # imgplot = plt.imshow(img)
     # plt.show()
     # d = np.asarray(d)
@@ -111,13 +112,18 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, (784, 1))
     arr = (255-arr)/256
-
-    print(arr)
+    
+    # print(arr)
     result = (net.feedforward(arr))
-    [print(i, "|", x) for i, x in enumerate(result)]
+    # [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
     print("result:", my_guess)
 
+    usernumber = UserNumbers(userID=current_user.id, image=request.get_data(), values=arr, guess=my_guess)
+    db.create_all()
+    db.session.add(usernumber)
+    db.session.commit()
+    print(usernumber)
     return render_template('draw.html')
 
 
@@ -180,7 +186,19 @@ def profile():
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     user = current_user
-    return render_template('profile.html', username=user.username)
+    usernumbers = user.usernumbers.all()
+    final = []
+    for numbers in usernumbers:
+        information = []
+        
+        information.append(numbers.image)
+        information.append(numbers.values)
+        information.append(numbers.guess)
+        print(information)
+        final.append(information)
+
+        
+    return render_template('profile.html', username=user.username, usernumbers=final)
 
 
 def parseImg(imageData):
