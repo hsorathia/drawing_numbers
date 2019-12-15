@@ -1,4 +1,4 @@
-<h1 aligh="center">Drawing numbers</h1>
+<h1 align="center">Drawing numbers</h1>
 
 ## By: Jerry Lee, Habib Sorathia, Calvin Ly, Wilson Zhang
 
