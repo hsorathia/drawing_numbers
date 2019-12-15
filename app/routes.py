@@ -112,14 +112,15 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, (784, 1))
     arr = (255-arr)/256
-    
+
     # print(arr)
     result = (net.feedforward(arr))
     # [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
     print("result:", my_guess)
 
-    usernumber = UserNumbers(userID=current_user.id, image=request.get_data(), values=arr, guess=my_guess)
+    usernumber = UserNumbers(
+        userID=current_user.id, image=request.get_data(), guess=int(my_guess))
     db.create_all()
     db.session.add(usernumber)
     db.session.commit()
@@ -190,15 +191,25 @@ def profile():
     final = []
     for numbers in usernumbers:
         information = []
-        
-        information.append(numbers.image)
-        information.append(numbers.values)
+        information.append(numbers.image.decode())
         information.append(numbers.guess)
-        print(information)
+        information.append(numbers.id)
+        #print(information)
         final.append(information)
 
-        
     return render_template('profile.html', username=user.username, usernumbers=final)
+
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    print(id)
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    userNums = UserNumbers.query.filter_by(id=id).first()
+    db.create_all()
+    db.session.delete(userNums)
+    db.session.commit()
+    
 
 
 def parseImg(imageData):

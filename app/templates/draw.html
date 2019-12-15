@@ -60,6 +60,13 @@
                 onClick="sendData()">Save</button></a>
         <button class="btn btn-danger" id="clear">Clear</button>
     </div>
+    <div class="row d-flex justify-content-center">
+        <p style="color: white;">Tip: Drawing in the center will give the most accurate results.</p>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <p id="submit-message" style="color: white; display: none;" ><i class="fas fa-check" style="color: rgb(32, 236, 32);"></i> View profile for results.</p>
+    </div>
+    
 </div>
 <script>
     function fillCanvasBackgroundWithColor(canvas, color) {
@@ -86,6 +93,13 @@
                 console.log("Sent")
             }
         });
+        $("#submit-message").css("display", "block");
+        setTimeout(function(){
+            $("#submit-message").css("display", "none");
+            const canvas = document.querySelector("#canvas");
+            const ctx = canvas.getContext("2d"); 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }, 3000)
         /*
         var download = document.getElementById("download");
         var image = document.getElementById("canvas").toDataURL("image/png")

@@ -63,20 +63,42 @@
     </div>
     <div class="container-fluid profile-content2" style="min-height: 100vh; margin-top: 50px;">
         <!--  USE FLASK FOR LOOP TO PRINT ALL SAVED IMAGES IN A CARD  -->
-        {% for numbers in final %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{numbers[0]}}"
-                    class="card-img-top" alt="...">
-                <div class="card-body">
+        <div class="row">
+            {% for i in range(usernumbers|length) %}
+            <div class="col-md-3 number-card-col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{usernumbers[i][0]}}" class="card-img-top" alt="...">
+                    <div class="card-body">
                         <h5 class="card-title">drawing</h5>
-                        <p class="card-text">This number is: {{numbers[2]}}</p>
-                        <a href="#" class="btn btn-danger">Delete</a>
-                        
-                    
+                        <p class="card-text">This number is: {{usernumbers[i][1]}}</p>
+                        <a href="#" class="btn btn-danger delete-btn"
+                            id={{usernumbers[i][2]}}>Delete</a>
+
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
     </div>
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+$(document).ready(function () {
+    $(".delete-btn").click(function (e) {
+        console.log(this.id)
+        $.ajax({
+            url: '/delete/'+this.id,
+            type: 'post'
+        }).done(function () {
+            location.reload();
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            location.reload();
+        });
+    })
+})
+</script>
 {% endblock %}

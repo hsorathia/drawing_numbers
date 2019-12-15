@@ -138,6 +138,12 @@ body{
 #canvas{
     background-color: white;
 }
+.card{
+    text-align: center;
+}
+.number-card-col{
+    padding: 20px;
+}
 
 /* PROFILE PAGE */
 .profile-content1{
