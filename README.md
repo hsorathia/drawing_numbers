@@ -5,7 +5,7 @@
 [Screenshots and notes](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing)
 
 # Problem
-Many older documents in an agency are handwritten. We aim to create a software tool to solve this problem.
+As the digital age continues to boom, the ability to translate handwriting to text autonomously is a necessary technology to have. Many older documents in an agency are handwritten. We aim to create a software tool to solve this problem. In this project specifically we created a web application that can translate a digit from 0 to 9 into a number using a neural network.
 
 
 # Solution Description
