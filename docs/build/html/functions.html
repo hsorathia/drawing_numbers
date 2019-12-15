@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Functions &#8212; Drawing Numbers 1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Drawing Numbers’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-app.routes">
+<span id="routes"></span><h2>Routes<a class="headerlink" href="#module-app.routes" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="app.routes.data">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data route used to send &amp; save images from frontend to backend</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.draw">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">draw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drawing page that allows users to draw/save numbers</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.home">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">home</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Landing page that describes the application</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.login">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">login</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login route for users to log into their account</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.logout">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">logout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logout route for users to log out of their account</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.parseImg">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">parseImg</code><span class="sig-paren">(</span><em class="sig-param">imageData</em><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.parseImg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function used to parse base64 into an image</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.profile">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">profile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Profile page that displays the user’s saved numbers, along with the neural network’s guess</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="app.routes.register">
+<code class="sig-prename descclassname">app.routes.</code><code class="sig-name descname">register</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#app.routes.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register route for users to register a new account</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-neural">
+<span id="neural-network"></span><h2>Neural network<a class="headerlink" href="#module-neural" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="neural.Network">
+<em class="property">class </em><code class="sig-prename descclassname">neural.</code><code class="sig-name descname">Network</code><span class="sig-paren">(</span><em class="sig-param">sizes=[784, 16, 16, 10]</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="neural.Network.backprop">
+<code class="sig-name descname">backprop</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.backprop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple that represents the gradient for the cost function</p>
+<dl>
+<dt>Parameters:</dt><dd><p>x(list[float]): 784 nodes of the input</p>
+<p>y(float): expected result</p>
+</dd>
+<dt>Returns:</dt><dd><p>gradient_b (float): gradient of steepest descent for biases</p>
+<p>gradient_w (float): gradient of steepest descent for weights</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.cost_derivative">
+<code class="sig-name descname">cost_derivative</code><span class="sig-paren">(</span><em class="sig-param">out_act</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.cost_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns vector of steepest descent from partial derivatives</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.evaluate">
+<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param">test_data</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a number that represents how many test inputs output the correct results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.feedforward">
+<code class="sig-name descname">feedforward</code><span class="sig-paren">(</span><em class="sig-param">a</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.feedforward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feed forward the inputs to receive the outputs from the output node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.getNetwork">
+<code class="sig-name descname">getNetwork</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.getNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the sizes, biases, and weights after the network has been trained</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.loadNodes">
+<code class="sig-name descname">loadNodes</code><span class="sig-paren">(</span><em class="sig-param">biases</em>, <em class="sig-param">weights</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.loadNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the nodes from a file; could be combined with __init__</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.training">
+<code class="sig-name descname">training</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">epoch</em>, <em class="sig-param">batchSize</em>, <em class="sig-param">eta</em>, <em class="sig-param">test_data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to train the neural network</p>
+<dl>
+<dt>Parameters:</dt><dd><p>data (list): training data</p>
+<p>epoch (int): how many times to run the training algorithm</p>
+<p>batchSize (int): size of array in each subset to train</p>
+<p>eta (int): learning rate</p>
+</dd>
+<dt>STDOUT:</dt><dd><p>Print: Epoch {#}: {Correct}/{Total}</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="neural.Network.upbatch">
+<code class="sig-name descname">upbatch</code><span class="sig-paren">(</span><em class="sig-param">batch</em>, <em class="sig-param">eta</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.Network.upbatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the neural network’s weights and biases</p>
+<dl>
+<dt>Parameters:</dt><dd><p>batch (list): test data</p>
+<p>eta (int): learning rate</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="neural.sigmoid">
+<code class="sig-prename descclassname">neural.</code><code class="sig-name descname">sigmoid</code><span class="sig-paren">(</span><em class="sig-param">z</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.sigmoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sigmoid function</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="neural.sigmoid_prime">
+<code class="sig-prename descclassname">neural.</code><code class="sig-name descname">sigmoid_prime</code><span class="sig-paren">(</span><em class="sig-param">z</em><span class="sig-paren">)</span><a class="headerlink" href="#neural.sigmoid_prime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of sigmoid function</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Drawing Numbers</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-app.routes">Routes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-neural">Neural network</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Drawing Numbers’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Jerry Lee.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.2.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/functions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

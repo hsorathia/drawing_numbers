@@ -111,7 +111,11 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, (784, 1))
     arr = (255-arr)/256
-
+    
+    img = np.reshape(arr, (28,28))
+    print(img)
+    disp = plt.imshow(img)
+    plt.show()
     # print(arr)
     result = (net.feedforward(arr))
     # [print(i, "|", x) for i, x in enumerate(result)]

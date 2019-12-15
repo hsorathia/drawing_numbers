@@ -54,6 +54,7 @@ class Network:
     def training(self, data, epoch, batchSize, eta, test_data=None):
         """
         Used to train the neural network
+
         Parameters:
             data (list): training data
             
@@ -63,7 +64,7 @@ class Network:
             
             eta (int): learning rate
         STDOUT:
-            Print: Epoch {#}, {Correct}/{Total}
+            Print: Epoch {#}: {Correct}/{Total}
         """
         # data = training data
         # epoch = how many times to put the whole data set into the network
@@ -112,6 +113,7 @@ class Network:
             # adjust the gradient based on backprop
             gradient_b = [nb+dnb for nb, dnb in zip(gradient_b, dgb)]
             gradient_w = [nw+dnw for nw, dnw in zip(gradient_w, dgw)]
+        # adjust weights and biases using the gradients
         self.weights = [w-(eta/len(batch))*nw
                         for w, nw in zip(self.weights, gradient_w)]
         self.biases = [b-(eta/len(batch))*nb
@@ -120,6 +122,7 @@ class Network:
     def backprop(self, x, y):
         """
         Returns a tuple that represents the gradient for the cost function
+
         Parameters:
             x(list[float]): 784 nodes of the input
 
