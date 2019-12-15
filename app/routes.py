@@ -8,7 +8,7 @@ from app.forms import LoginForm, RegisterForm
 from app.models import User
 from werkzeug.urls import url_parse
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import re
@@ -45,6 +45,8 @@ def data():
     d = Image.open('result.png', 'r')
     # resize image to 28x28
     d = d.resize((28, 28))
+    enhancer = ImageEnhance.Sharpness(d)
+    d = enhancer.enhance(0.15)
     d.save('result.png')
 
     img = mpimg.imread('result.png')
