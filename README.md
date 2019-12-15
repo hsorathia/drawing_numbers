@@ -15,7 +15,7 @@ The solution to this would be image recognition, or more specifically, character
 # Algorithms and Data Structures
 
 ## Neural Network
-A neural network is both an algorithm and data structure. Although the neural network resembles a graph, it lacks the physical nodes that are present in a graph. It has biases and weights, which are lists. It uses a back propogation algorithm to train and adjust the biases and weights. The neural network itself is also often described as an algorithm to convert images to digits.
+A neural network is both an algorithm and data structure. Although the neural network resembles a graph, it lacks the physical nodes that are present in a graph. It has biases and weights, which are lists. It uses a back propogation algorithm to train and adjust the biases and weights. The neural network itself is also often described as an algorithm to convert images to digits. Our neural network has a total of 4 layers: 1 input (784 nodes), 2 hidden (16 nodes each), and 1 output (10 nodes for each digit). The network has a total of `784*16 + 16*16 + 16*10 = 12960` weights. It has `16+16+10 = 42` biases. A handwritten explanation of the data and feedforward function can be shown [here](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing). 
 
 ## Algorithms
 Aside from the neural network, we also used a variety of algorithms in our website. They are documented through sphinx documentation. 
@@ -63,6 +63,9 @@ PIL stands for Python imaging library and is also known as Pillow. PIL comes wit
 
 ## Numpy
 Numpy is a python library that comes with utilities for linear algebra. It provids more efficient methods of array manipulation. In our neural network, we used this for shuffling, randomizing, dot products, and finding the index of the maximum value.
+
+## Matplot
+Matplot was used in the initial testing of our resizing function and provided a better way of seeing our image rescaling results.
 
 ## MNIST
 MNIST provided a dataset of 10,000 handwritten digits which we used to train our neural network in. We used this in `mnist_loader.py` to return the test cases.
