@@ -59,7 +59,7 @@ def data():
     d.save('result.png')
 
     img = mpimg.imread('result.png')
-    imgplot = plt.imshow(img)
+    # imgplot = plt.imshow(img)
     # plt.show()
     # d = np.asarray(d)
     # # reshape the data to feed into NN
@@ -79,8 +79,8 @@ def data():
         # img = enhancer.enhance(0.5)
         # make grayscale
         img = img.convert('L')
-        disp = plt.imshow(img)
-        plt.show()
+        # disp = plt.imshow(img)
+        # plt.show()
         # img.show()
         arr = np.array(img)
         # print(arr)
@@ -116,7 +116,7 @@ def data():
     result = (net.feedforward(arr))
     [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
-    print("result:", np.argmax(result))
+    print("result:", my_guess)
 
     return render_template('draw.html')
 
