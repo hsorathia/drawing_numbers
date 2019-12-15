@@ -8,7 +8,7 @@ from app.forms import LoginForm, RegisterForm
 from app.models import User
 from werkzeug.urls import url_parse
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import re
@@ -49,7 +49,7 @@ def data():
 
     img = mpimg.imread('result.png')
     imgplot = plt.imshow(img)
-    plt.show()
+    # plt.show()
     # d = np.asarray(d)
     # # reshape the data to feed into NN
     # d = d.reshape(-1, 1, 28, 28)
@@ -61,9 +61,14 @@ def data():
         img = Image.open("result.png", 'r')
         # img.show()
         # resize image
+        img = img.resize((20, 20))
         img = img.resize((28, 28), Image.ANTIALIAS)
+        # enhancer = ImageEnhance.Sharpness(img)
+        # img = enhancer.enhance(0.5)
         # make grayscale
         img = img.convert('L')
+        disp = plt.imshow(img)
+        plt.show()
         # img.show()
         arr = np.array(img)
         # print(arr)
@@ -94,6 +99,8 @@ def data():
     # convert arr to 1d
     arr = np.reshape(arr, (784,1))
     arr = (255-arr)/256
+    
+    print(arr)
     result = (net.feedforward(arr))
     [print(i, "|", x) for i, x in enumerate(result)]
     my_guess = np.argmax(result)
