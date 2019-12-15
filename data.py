@@ -28,7 +28,7 @@ def prepImage():
     Turns image from png to a 2d grayscale array
     """
     # open image
-    img = Image.open("six.jpg", 'r')
+    img = Image.open("five.png", 'r')
     # img.show()
     # resize image
     img = img.resize((28, 28), Image.ANTIALIAS)
@@ -40,8 +40,8 @@ def prepImage():
     return arr
 
 # loaing training data. uncomment to train
-# training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
-# training_data = list(training_data)
+training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
+training_data = list(training_data)
 
 # Training neural network with 4 layers, uncomment to train
 # net = neural.Network(sizes=[784, 16, 16, 10])
@@ -50,14 +50,14 @@ def prepImage():
 # running neural network
 arr = prepImage()
 # convert arr to 1d
-arr = np.reshape(arr, 784)
-arr = [(255-x)/256 for x in arr]
+arr = np.reshape(arr, (784,1))
+arr = (255-arr)/256
 result = (net.feedforward(arr))
 [print(i, "|", x) for i,x in enumerate(result)]
 print ("result:", np.argmax(result))
 
 # store data after training, uncomment to store
-# sizes, biases, weights = net.getNetwork()
+sizes, biases, weights = net.getNetwork()
 
 ### write to separate files, uncomment to write
 # fsizes = open('nn_sizes.pkl', 'wb')

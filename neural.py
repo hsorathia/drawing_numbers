@@ -28,7 +28,7 @@ class Network:
     def feedforward(self, a):
         # a is the input of the network (the image)
         for bias, weight in zip(self.biases, self.weights):
-            a = sigmoid(np.dot(weight, a) + bias[0])
+            a = sigmoid(np.dot(weight, a) + bias)
         return a
 
     def training(self, data, epoch, batchSize, eta, test_data=None):
