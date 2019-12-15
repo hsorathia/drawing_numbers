@@ -96,6 +96,12 @@ This project really tested the abilities of our group. This project was a new co
 </ul>
 
 ### Calvin
+<ul>
+<li>Designed and created the pages for the frontend</li>
+<li>Created drawing canvas for user to draw on (w/ save functionality)</li>
+<li>Connected the frontend & backend to dynamically display results</li>
+<li>Helped save images/outputs of the user into the database</li>
+</ul>
 
 ### Habib
 <ul>
