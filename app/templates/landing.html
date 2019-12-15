@@ -29,12 +29,14 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('home') }}" style="color: white;"><b>Home</b></a>
             </li>
+            {% if not current_user.is_anonymous %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('draw') }}">Draw</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('profile') }}">Profile</a>
             </li>
+            {% endif %}
         </ul>
         <div class="my-2 my-lg-0 d-flex align-items-end">
             <ul class="navbar-nav">
@@ -268,13 +270,7 @@
         //     console.log(data)
         //     e.preventDefault();
         // });
-
     })
-    $(function () {
-        $(document).scroll(function () {
-            var $nav = $(".navbar");
-            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        });
-    });
+    
 </script>
 {% endblock %}
