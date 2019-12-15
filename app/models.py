@@ -9,7 +9,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    usernumbers = db.relationship('UserNumbers', backref="author", lazy="dynamic")
+    usernumbers = db.relationship(
+        'UserNumbers', backref="author", lazy="dynamic")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -20,12 +21,14 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+
 class UserNumbers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userID = db.Column(db.Integer, db.ForeignKey('user.id'))
-
     image = db.Column(db.LargeBinary)
-    
+    #values = db.Column(db.Text)
+    guess = db.Column(db.Integer)
+
 
 # neural network
 # class NN(db.Model):
