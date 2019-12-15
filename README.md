@@ -9,13 +9,13 @@ The solution to this would be image recognition, or more specifically, character
 # Algorithms and Data Structures
 
 ## Neural Network
-A neural network is both an algorithm and data structure. 
+A neural network is both an algorithm and data structure. Although the neural network resembles a graph, it lacks the physical nodes that are present in a graph. It has biases and weights, which are lists. It uses a back propogation algorithm to train and adjust the biases and weights. The neural network itself is also often described as an algorithm to convert images to digits. 
 
 ## Algorithms
-The functions are documented through sphinx documentation since we used a variety of algorithms for our website and neural network. 
+Aside from the neural network, we also used a variety of algorithms in our website. They are documented through sphinx documentation. 
 
 ## Data structures
-The main data struc
+The data structure used most in our project is lists. Our neural network consists of three main lists: size, biases, weights. 
 
 
 
