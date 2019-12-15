@@ -23,6 +23,9 @@ sys.path.append(os.path.abspath("./model"))
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    """
+    Landing page that describes the application
+    """
     form_login = LoginForm()
     form_register = RegisterForm()
     return render_template('landing.html', form_login=form_login, form_register=form_register)
@@ -30,6 +33,9 @@ def home():
 
 @app.route('/draw', methods=['GET', 'POST'])
 def draw():
+    """
+    Drawing page that allows users to draw/save numbers
+    """
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     return render_template('draw.html')
@@ -37,6 +43,9 @@ def draw():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
+    """
+    Data route used to send & save images from frontend to backend
+    """
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     # gets canvas image
@@ -55,6 +64,7 @@ def data():
     # d = np.asarray(d)
     # # reshape the data to feed into NN
     # d = d.reshape(-1, 1, 28, 28)
+
     def prepImage():
         """
         Turns image from png to a 2d grayscale array
@@ -99,9 +109,9 @@ def data():
     # running neural network
     arr = prepImage()
     # convert arr to 1d
-    arr = np.reshape(arr, (784,1))
+    arr = np.reshape(arr, (784, 1))
     arr = (255-arr)/256
-    
+
     print(arr)
     result = (net.feedforward(arr))
     [print(i, "|", x) for i, x in enumerate(result)]
@@ -113,6 +123,9 @@ def data():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Login route for users to log into their account
+    """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     if request.method == 'POST':
@@ -128,6 +141,9 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Register route for users to register a new account
+    """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     if request.method == 'POST':
@@ -149,12 +165,18 @@ def register():
 
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
+    """
+    Logout route for users to log out of their account
+    """
     logout_user()
     return redirect(url_for('home'))
 
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    """
+    Profile page that displays the user's saved numbers, along with the neural network's guess
+    """
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     user = current_user
@@ -162,6 +184,9 @@ def profile():
 
 
 def parseImg(imageData):
+    """
+    Helper function used to parse base64 into an image
+    """
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
     # parse canvas image bytes and save as result.png

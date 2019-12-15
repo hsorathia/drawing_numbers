@@ -19,19 +19,31 @@ class Network:
         print("Weights and bias set up")
 
     def getNetwork(self):
+        """
+        Returns the network in a tuple that contains the sizes, biases, and weights.
+        """
         return (self.sizes, self.biases, self.weights)
 
     def loadNodes(self, biases, weights):
+        """
+        Function to load the nodes with their biases and weights.
+        """
         self.biases = biases
         self.weights = weights
 
     def feedforward(self, a):
+        """
+        Returns output of the neural network if 'a' is input
+        """
         # a is the input of the network (the image)
         for bias, weight in zip(self.biases, self.weights):
             a = sigmoid(np.dot(weight, a) + bias)
         return a
 
     def training(self, data, epoch, batchSize, eta, test_data=None):
+        """
+        Trains the neural network using gradient descent
+        """
         # data = training data
         # epoch = how many times to put the whole data set into the network
         # batchSize = we will splice the training data into batches and feed them in. This is the size
@@ -62,6 +74,9 @@ class Network:
                 print("Epoch{} complete".format(i))
 
     def upbatch(self, batch, eta):
+        """
+        Updates the neural network's weights and biases
+        """
         # batch is the data
         # eta is learning rate
         # gradient vectors of bias and weight for adjustment
@@ -78,6 +93,9 @@ class Network:
                        for b, nb in zip(self.biases, gradient_b)]
 
     def backprop(self, x, y):
+        """
+        Returns a tuple that represents the gradient for the cost function
+        """
         # gradient vectors of bias and weight
         gradient_b = [np.zeros(b.shape) for b in self.biases]
         gradient_w = [np.zeros(w.shape) for w in self.weights]
@@ -112,22 +130,34 @@ class Network:
 
     # how many test inputs output the correct result
     def evaluate(self, test_data):
+        """
+        Returns a number that represents how many test inputs output the correct results
+        """
         # obtain results by feeding everything forward. results[0] is network result, results[1] is expected
         results = [(np.argmax(self.feedforward(x)), y) for (x, y) in test_data]
         return sum(int(x == y) for (x, y) in results)
 
     # return vector of steepest descent from partial derivatives
     def cost_derivative(self, out_act, y):
+        """
+        Returns vector of steepest descent from partial derivatives
+        """
         return (out_act-y)
 
 # sigmoid function (copied from github)
 
 
 def sigmoid(z):
+    """
+    Sigmoid function 
+    """
     return 1.0/(1.0+np.exp(-z))
 
 # derivative of sigmoid (copied from github because calculus is hard)
 
 
 def sigmoid_prime(z):
+    """
+    Derivative of the sigmoid function
+    """
     return sigmoid(z)*(1-sigmoid(z))
