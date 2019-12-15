@@ -18,7 +18,7 @@ The solution to this would be image recognition, or more specifically, character
 A neural network is both an algorithm and data structure. Although the neural network resembles a graph, it lacks the physical nodes that are present in a graph. It has biases and weights, which are lists. It uses a back propogation algorithm to train and adjust the biases and weights. The neural network itself is also often described as an algorithm to convert images to digits. Our neural network has a total of 4 layers: 1 input (784 nodes), 2 hidden (16 nodes each), and 1 output (10 nodes for each digit). The network has a total of `784*16 + 16*16 + 16*10 = 12960` weights. It has `16+16+10 = 42` biases. A handwritten explanation of the data and feedforward function can be shown [here](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing). 
 
 ## Algorithms
-Aside from the neural network, we also used a variety of algorithms in our website. They are documented through sphinx documentation. 
+Aside from the neural network, we also used a variety of algorithms in our website. They are documented through sphinx documentation. To view a summary of each function, clone the repository and run `./docs/build/html/index.html`. 
 
 ## Data structures
 The data structure used most in our project is lists. Our neural network consists of three main lists: size, biases, weights. We also used lists in the back-end of the website. This was so we could store the information of the user generated numbers (their images), and the guessed value so the user
