@@ -3,6 +3,17 @@ import numpy as np
 
 class Network:
     def __init__(self, sizes=[784, 16, 16, 10]):
+        """
+        Initialize the neural network with the given layers. The neural network has a total of 4 layers.
+
+        Layer 1:
+            784 nodes corresponding to the grayscale values for pixels in the 28x28 image
+        Layers 2 and 3:
+            Hidden layers of the neural network that are modified from training
+        Layer 4:
+            Output layer of the confidence the network has in each digit
+
+        """
         # sizes = number of sizes in each layer of the network. in this case it would be [784, 16, 16, 10]
         self.num_layers = len(sizes) # integer
         self.sizes = sizes # array of integers
@@ -16,19 +27,31 @@ class Network:
         print("Weights and bias set up")
     
     def getNetwork(self):
+        """
+        Return the sizes, biases, and weights after the network has been trained
+        """
         return (self.sizes, self.biases, self.weights)
 
     def loadNodes(self, biases, weights):
+        """
+        Initialize the nodes from a file; could be combined with __init__
+        """
         self.biases = biases
         self.weights = weights
 
     def feedforward(self, a):
+        """
+        Feed forward the inputs to receive the outputs from the output node
+        """
         # a is the input of the network (the image)
         for bias, weight in zip(self.biases, self.weights):
             a = sigmoid(np.dot(weight, a) + bias)
         return a
     
     def training(self, data, epoch, batchSize, eta, test_data=None):
+        """
+        Used to train the neural network
+        """
         # data = training data
         # epoch = how many times to put the whole data set into the network
         # batchSize = we will splice the training data into batches and feed them in. This is the size
@@ -117,8 +140,14 @@ class Network:
 
 # sigmoid function (copied from github)
 def sigmoid(z):
+    """
+    Sigmoid function
+    """
     return 1.0/(1.0+np.exp(-z))
 
 # derivative of sigmoid (copied from github because calculus is hard)
 def sigmoid_prime(z):
+    """
+    Derivative of sigmoid function
+    """
     return sigmoid(z)*(1-sigmoid(z))
