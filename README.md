@@ -4,12 +4,14 @@
 
 [Screenshots and notes](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing)
 
+[Online deployment](https://drawing-numbers.herokuapp.com/)
+
 # Problem
 As the digital age continues to boom, the ability to translate handwriting to text autonomously is a necessary technology to have. Many older documents in an agency are handwritten. We aim to create a software tool to solve this problem. In this project specifically we created a web application that can translate a digit from 0 to 9 into a number using a neural network.
 
 
 # Solution Description
-The solution to this would be image recognition, or more specifically, character recognition. This project takes a step towards character recognition by detecting digits.
+The solution to this would be image recognition, or more specifically, character recognition. This project takes a step towards character recognition by detecting digits. Our website consists of 3 pages: Home, Draw, Profile. The home page has general information about the neural network. Draw allows one to draw a number with the option of saving or clearing the pad. Saving will run the picture through our neural network and our machine will give a guess as to what digit was drawn. The image will be saved in our Profile page, where the user can view or delete a list of drawn images.
 
 
 # Algorithms and Data Structures
@@ -78,8 +80,6 @@ We utilized bootstrap and it's dependencies to make our website look much pretti
 
 ## Heroku
 We deployed our website on heroku, and it was successfully deployed on [here](https://drawing-numbers.herokuapp.com/).
-
-https://drawing-numbers.herokuapp.com/
 
 ## Sphinx documentation
 We used sphinx documentation to document our functions and code. 
