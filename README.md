@@ -87,6 +87,7 @@ This project really tested the abilities of our group. This project was a new co
 <li>Created the neural network</li>
 <li>Saved the neural network nodes for the website</li>
 <li>Did documentation on neural network</li>
+</ul>
 
 ### Calvin
 
