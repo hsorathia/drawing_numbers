@@ -82,39 +82,39 @@ def vectorized_result(j):
 
 
 ### understanding the data
-training_data, validation_data, test_data = load_data_wrapper()
-data, res = zip(*test_data)
-# print(data[0])
-# print(res[0])
+# training_data, validation_data, test_data = load_data_wrapper()
+# data, res = zip(*test_data)
+# # print(data[0])
+# # print(res[0])
 
-from PIL import Image
-import matplotlib.pyplot as plt
+# from PIL import Image
+# import matplotlib.pyplot as plt
 
-img = np.reshape(255-data[0]*256, (28,28))
-print(img)
-disp = plt.imshow(img)
-plt.show()
+# img = np.reshape(255-data[0]*256, (28,28))
+# print(img)
+# disp = plt.imshow(img)
+# plt.show()
 
-import neural
-# load sizes
-fsizes = open('nn_sizes.pkl', 'rb')
-sizes = pickle.load(fsizes)
-fsizes.close()
+# import neural
+# # load sizes
+# fsizes = open('nn_sizes.pkl', 'rb')
+# sizes = pickle.load(fsizes)
+# fsizes.close()
 
-# load biases
-fbiases = open('nn_biases.pkl', 'rb')
-biases = pickle.load(fbiases)
-fbiases.close()
+# # load biases
+# fbiases = open('nn_biases.pkl', 'rb')
+# biases = pickle.load(fbiases)
+# fbiases.close()
 
-# load weights
-fweights = open('nn_weights.pkl', 'rb')
-weights = pickle.load(fweights)
-fweights.close()
+# # load weights
+# fweights = open('nn_weights.pkl', 'rb')
+# weights = pickle.load(fweights)
+# fweights.close()
 
-# set up neural network based on file
-net = neural.Network(sizes=sizes)
-net.loadNodes(biases=biases, weights=weights)
+# # set up neural network based on file
+# net = neural.Network(sizes=sizes)
+# net.loadNodes(biases=biases, weights=weights)
 
-result = net.feedforward(data[0])
-[print(i, "|", x) for i,x in enumerate(result)]
-print ("result:", np.argmax(result))
+# result = net.feedforward(data[0])
+# [print(i, "|", x) for i,x in enumerate(result)]
+# print ("result:", np.argmax(result))

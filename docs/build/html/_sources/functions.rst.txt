@@ -1,0 +1,14 @@
+Functions
+=========
+
+Routes
+------
+.. automodule:: app.routes
+    :members:
+    :no-undoc-members:
+
+Neural network
+--------------
+.. automodule:: neural
+    :members:
+    :undoc-members:

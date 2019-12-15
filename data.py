@@ -28,9 +28,10 @@ def prepImage():
     Turns image from png to a 2d grayscale array
     """
     # open image
-    img = Image.open("five.png", 'r')
+    img = Image.open("result.png", 'r')
     # img.show()
     # resize image
+    img = img.resize((20, 20))
     img = img.resize((28, 28), Image.ANTIALIAS)
     # make grayscale
     img = img.convert('L')
@@ -55,6 +56,8 @@ arr = (255-arr)/256
 result = (net.feedforward(arr))
 [print(i, "|", x) for i,x in enumerate(result)]
 print ("result:", np.argmax(result))
+
+
 
 # store data after training, uncomment to store
 sizes, biases, weights = net.getNetwork()
