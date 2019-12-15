@@ -92,13 +92,21 @@ This project really tested the abilities of our group. This project was a new co
 <li>Created the mnist loader and took apart the test cases</li>
 <li>Created the neural network</li>
 <li>Saved the neural network nodes for the website</li>
+</ul>
+
+### Wilson
+<ul>
+<li>Finished register/logout functionality </li>
+<li>Brainstormed ideas and methods of carrying out tasks</li>
+<li>Ensured each group member was on task and working</li>
+<li>Tested each feature and helped fix bugs</li>
 <li>Did documentation on neural network</li>
 </ul>
 
 ### Calvin
 <ul>
 <li>Designed and created the pages for the frontend</li>
-<li>Created drawing canvas for user to draw on (w/ save functionality)</li>
+<li>Created drawing canvas for user to draw on (w/ save and clear functionality)</li>
 <li>Connected the frontend & backend to dynamically display results</li>
 <li>Helped save images/outputs of the user into the database</li>
 </ul>
@@ -106,9 +114,8 @@ This project really tested the abilities of our group. This project was a new co
 ### Habib
 <ul>
 <li>Created initial loader for mnist data</li>
-<li>Created flask template and routes for website</li>
-<li>Created login/register/logout functionality</li>
-<li>Displayed cards onto profile page</li>
-<li>Deployed project to herokun</li>
+<li>Created flask template, routes, and databases for website</li>
+<li>Created login/register form functionality</li>
+<li>Displayed cards (and delete all functionality) onto profile page</li>
+<li>Deployed project to heroku</li>
 </ul>
-### Wilson
