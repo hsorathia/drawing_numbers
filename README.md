@@ -2,7 +2,7 @@
 
 ## By: Jerry Lee, Habib Sorathia, Calvin Ly, Wilson Zhang
 
-[Link to google docs images](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing)
+[Screenshots and notes](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing)
 
 # Problem
 Many older documents in an agency are handwritten. We aim to create a software tool to solve this problem.
