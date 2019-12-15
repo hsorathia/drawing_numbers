@@ -54,6 +54,16 @@ class Network:
     def training(self, data, epoch, batchSize, eta, test_data=None):
         """
         Used to train the neural network
+        Parameters:
+            data (list): training data
+            
+            epoch (int): how many times to run the training algorithm
+            
+            batchSize (int): size of array in each subset to train
+            
+            eta (int): learning rate
+        STDOUT:
+            Print: Epoch {#}, {Correct}/{Total}
         """
         # data = training data
         # epoch = how many times to put the whole data set into the network
@@ -79,14 +89,18 @@ class Network:
                 self.upbatch(batch, eta)
             if test_data:
                 # Print Epoch #, how many correct, number tests
-                print("Epoch{}: {} / {}".format(i,
-                                                self.evaluate(test_data), n_test))
+                print("Epoch{}: {} / {}".format(i, self.evaluate(test_data), n_test))
             else:
                 print("Epoch{} complete".format(i))
 
     def upbatch(self, batch, eta):
         """
         Updates the neural network's weights and biases
+        
+        Parameters:
+            batch (list): test data
+
+            eta (int): learning rate
         """
         # batch is the data
         # eta is learning rate
@@ -106,8 +120,17 @@ class Network:
     def backprop(self, x, y):
         """
         Returns a tuple that represents the gradient for the cost function
+        Parameters:
+            x(list[float]): 784 nodes of the input
+
+            y(float): expected result
+        
+        Returns:
+            gradient_b (float): gradient of steepest descent for biases
+
+            gradient_w (float): gradient of steepest descent for weights
         """
-        # gradient vectors of bias and weight
+        # gradient vectors of bias and weight filled with zeroes
         gradient_b = [np.zeros(b.shape) for b in self.biases]
         gradient_w = [np.zeros(w.shape) for w in self.weights]
 
@@ -115,22 +138,23 @@ class Network:
         activation = x     # currently activated
         activations = [x]  # list for all activations
         zs = []            # all z vectors
-        # check every bias/weight
+        # feedforward function
         for b, w in zip(self.biases, self.weights):
-            # dot product between weight and activation layer
+            # each node without the sigmoid function in a layer
             z = np.dot(w, activation) + b
             zs.append(z)
-            # feed z through the sigmoid function
+            # feed node through the sigmoid function to get true value
             activation = sigmoid(z)
             activations.append(activation)
         # backward pass
-        # calculate steepest descent
+        # calculate how far off the true result is
         delta = self.cost_derivative(
             activations[-1], y) * sigmoid_prime(zs[-1])
-        # update gradient
+        # update gradients
         gradient_b[-1] = delta
         gradient_w[-1] = np.dot(delta, activations[-2].transpose())
-        # renumbering each neuron
+        
+        # backprop through each layer, updating bias and weight gradients
         for x in range(2, self.num_layers):
             z = zs[-x]
             sp = sigmoid_prime(z)
