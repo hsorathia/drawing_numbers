@@ -2,7 +2,7 @@
 
 ## By: Jerry Lee, Habib Sorathia, Calvin Ly, Wilson Zhang
 
-[Screenshots and notes](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing)
+Please use these [Screenshots and notes](https://docs.google.com/document/d/1bLg6yaiKLpGwETKzg33juMflCuPrBKwTKRTlUoOGR6s/edit?usp=sharing) to better understand how to use the application and how to navigate easily.
 
 [Online deployment](https://drawing-numbers.herokuapp.com/)
 

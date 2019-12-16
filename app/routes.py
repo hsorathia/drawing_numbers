@@ -155,18 +155,25 @@ def register():
         return redirect(url_for('home'))
     if request.method == 'POST':
         print(request.form["password"])
-        user = User(
-            username=request.form["username"], email=request.form["email"])
-        user.set_password(request.form["password"])
-        if User.query.filter_by(username=request.form['username']).first():
-            flash('Username already taken')
+        print(request.form["password2"])
+        if request.form["password"] == request.form["password2"]:
+            user = User(
+                username=request.form["username"], email=request.form["email"])
+            user.set_password(request.form["password"])
+            
+            if User.query.filter_by(username=request.form['username']).first() :
+                print('Username already taken')
+                return redirect(url_for('home'))
+            else:
+                db.create_all()
+                db.session.add(user)
+                db.session.commit()
+                flash('Congratulations, you are now a registered user!')
+                # login_user(user)
+                # return redirect(url_for('draw'))
         else:
-            db.create_all()
-            db.session.add(user)
-            db.session.commit()
-            flash('Congratulations, you are now a registered user!')
-            # login_user(user)
-            # return redirect(url_for('draw'))
+            print("password's are not the same")
+            return redirect(url_for('home'))
     return redirect(url_for('home'))
 
 
