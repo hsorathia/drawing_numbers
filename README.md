@@ -13,6 +13,20 @@ As the digital age continues to boom, the ability to translate handwriting to te
 # Solution Description
 The solution to this would be image recognition, or more specifically, character recognition. This project takes a step towards character recognition by detecting digits. Our website consists of 3 pages: Home, Draw, Profile. The home page has general information about the neural network. Draw allows one to draw a number with the option of saving or clearing the pad. Saving will run the picture through our neural network and our machine will give a guess as to what digit was drawn. The image will be saved in our Profile page, where the user can view or delete a list of drawn images.
 
+# Getting Started
+To setup a localhost web server for developmental purposes, install Python 3.6 with pip.
+
+## Installing
+Git clone this repository and follow the steps below.
+
+Open up the cloned repo and install the required packages in terminal
+```python
+pip install -U -r requirements.txt 
+```
+To run the application
+```python
+python main.py
+```
 
 # Algorithms and Data Structures
 
