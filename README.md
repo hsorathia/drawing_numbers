@@ -75,7 +75,7 @@ MNIST provided a dataset of 10,000 handwritten digits which we used to train our
 ## Flask
 We used flask, which is a package for Python that can serve as a micro-web framework. We utilzed this to serve as the controller for our website so the user could navigate and route through different web pages with ease.
 
-## Boostrap 
+## Bootstrap 
 We utilized bootstrap and it's dependencies to make our website look much prettier.
 
 ## Heroku
